@@ -2,64 +2,112 @@ import MessageBubble from "./MessageBubble";
 import TypingIndicator from "./TypingIndicator";
 
 
-function ChatWindow({ messages, loading }) {
+
+function ChatWindow({
+
+messages,
+
+loading
+
+}){
 
 
-  return (
-
-    <div className="ai-chat-window">
+return(
 
 
-      {
-        messages.length === 0 && (
-
-          <div className="ai-empty-state">
-
-            <div className="ai-empty-icon">
-              🤖
-            </div>
-
-            <h2>
-              How can I help you today?
-            </h2>
-
-            <p>
-              Ask anything. Learn anything. Create anything.
-            </p>
-
-          </div>
-
-        )
-      }
+<div className="ai-chat-window">
 
 
 
-      {
-        messages.map((message,index)=>(
 
-          <MessageBubble
 
-            key={index}
+{
+messages.length === 0 && (
 
-            sender={message.sender}
+<div className="ai-empty-state">
 
-            text={message.text}
 
-          />
+<div className="ai-empty-icon">
 
-        ))
-      }
+🤖
+
+</div>
 
 
 
-      {
-        loading && <TypingIndicator />
-      }
+<h2>
+
+How can I help you today?
+
+</h2>
 
 
-    </div>
 
-  );
+
+<p>
+
+Ask questions, learn concepts, create ideas, and solve problems with your personal AI assistant.
+
+</p>
+
+
+
+</div>
+
+)
+}
+
+
+
+
+
+
+
+
+{
+
+messages.map((message,index)=>(
+
+
+<MessageBubble
+
+
+key={index}
+
+
+sender={message.sender}
+
+
+text={message.text}
+
+
+/>
+
+
+))
+
+}
+
+
+
+
+
+
+
+{
+
+loading && <TypingIndicator/>
+
+}
+
+
+
+
+</div>
+
+
+);
+
 
 }
 

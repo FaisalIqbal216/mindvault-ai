@@ -4,7 +4,7 @@ import axios from "axios";
 
 const API = axios.create({
 
-    baseURL:"http://localhost:5000/api"
+baseURL:"http://localhost:5000/api"
 
 });
 
@@ -12,56 +12,211 @@ const API = axios.create({
 
 
 
-export const sendMessage = async(
-
-message,
-
-chatId
-
-)=>{
 
 
-try{
+API.interceptors.request.use(
+
+(config)=>{
 
 
-const response = await API.post(
+const token =
+localStorage.getItem("token");
 
-"/chat",
 
-{
 
-message,
+if(token){
 
-chatId
+config.headers.Authorization =
+`Bearer ${token}`;
+
+}
+
+
+
+return config;
+
 
 }
 
 );
 
+
+
+
+
+
+
+
+
+// ===============================
+// CHAT
+// ===============================
+
+
+export const sendMessage = async(message, chatId)=>{
+
+
+const response =
+await API.post("/chat",{
+
+message,
+
+chatId
+
+});
 
 
 return response.data;
 
 
-
-}
-
-catch(error){
+};
 
 
-console.log(
 
-"API Error:",
 
-error
+
+
+
+
+
+// ===============================
+// AUTH
+// ===============================
+
+
+export const loginUser = async(data)=>{
+
+
+const response =
+await API.post("/auth/login",data);
+
+
+return response.data;
+
+
+};
+
+
+
+
+
+
+export const registerUser = async(data)=>{
+
+
+const response =
+await API.post("/auth/register",data);
+
+
+return response.data;
+
+
+};
+
+
+
+
+
+
+
+
+
+// ===============================
+// USER PROFILE
+// ===============================
+
+
+export const getProfile = async()=>{
+
+
+const response =
+await API.get("/user/profile");
+
+
+return response.data;
+
+
+};
+
+
+
+
+
+
+
+export const updateProfile = async(data)=>{
+
+
+const response =
+await API.patch(
+
+"/user/profile",
+
+data
 
 );
 
 
-throw error;
-
-
-}
+return response.data;
 
 
 };
+
+
+
+
+
+
+
+
+
+// ===============================
+// USER SETTINGS
+// ===============================
+
+
+export const getSettings = async()=>{
+
+
+const response =
+await API.get("/user/settings");
+
+
+return response.data;
+
+
+};
+
+
+
+
+
+
+
+export const updateSettings = async(data)=>{
+
+
+const response =
+await API.patch(
+
+"/user/settings",
+
+data
+
+);
+
+
+return response.data;
+
+
+};
+
+
+
+
+
+
+
+
+
+export default API;

@@ -1,30 +1,97 @@
 require("dotenv").config();
 
-const express=require("express");
-const cors=require("cors");
 
-const connectDB=require("./config/database");
+const express = require("express");
+const cors = require("cors");
 
 
-const app=express();
+const connectDB = require("./config/database");
 
+
+
+const app = express();
+
+
+
+// Database Connection
 
 connectDB();
 
 
-app.use(cors());
-app.use(express.json());
+
+// Middlewares
+
+app.use(
+    cors()
+);
 
 
-const chatRoutes=require("./routes/chatRoutes");
+app.use(
+    express.json()
+);
 
 
-app.use("/api/chat",chatRoutes);
+
+// Routes
+
+const chatRoutes = require("./routes/chatRoutes");
+
+const authRoutes = require("./routes/authRoutes");
+
+const chatHistoryRoutes =
+require("./routes/chatHistoryRoutes");
+
+const userRoutes =
+require("./routes/userRoutes");
 
 
 
-app.listen(5000,()=>{
 
-console.log("Server running on port 5000");
+// Chat API
 
-});
+app.use(
+    "/api/chat",
+    chatRoutes
+);
+
+
+
+// Authentication API
+
+app.use(
+    "/api/auth",
+    authRoutes
+);
+
+
+
+// Chat History API
+
+app.use(
+    "/api/chat-history",
+    chatHistoryRoutes
+);
+
+
+
+// User Profile + Settings API
+
+app.use(
+    "/api/user",
+    userRoutes
+);
+
+
+
+// Server
+
+app.listen(
+    5000,
+    ()=>{
+
+        console.log(
+            "Server running on port 5000"
+        );
+
+    }
+);

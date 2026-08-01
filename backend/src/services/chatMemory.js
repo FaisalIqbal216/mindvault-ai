@@ -2,53 +2,71 @@ const Chat = require("../models/Chat");
 
 
 
-const createChat = async()=>{
 
 
-    const chat = await Chat.create({
-
-        title:"New Conversation",
-        messages:[]
-
-    });
+const createChat = async(userId)=>{
 
 
-    return chat._id;
+const chat = await Chat.create({
+
+    userId,
+
+    title:"New Conversation",
+
+    messages:[]
+
+});
+
+
+return chat._id;
+
+
+};
+
+
+
+
+
+
+
+const addMessage = async(
+chatId,
+role,
+content
+)=>{
+
+
+await Chat.findByIdAndUpdate(
+
+chatId,
+
+{
+
+$push:{
+
+messages:{
+
+role,
+
+content
+
+}
+
+},
+
+
+updatedAt:new Date()
+
+
+}
+
+
+);
 
 
 };
 
 
-
-
-
-const addMessage = async(chatId,role,content)=>{
-
-
-    await Chat.findByIdAndUpdate(
-
-        chatId,
-
-
-        {
-
-            $push:{
-                messages:{
-                    role,
-                    content
-                }
-            },
-
-
-            updatedAt:new Date()
-
-        }
-
-
-    );
-
-
-};
 
 
 
@@ -58,27 +76,32 @@ const addMessage = async(chatId,role,content)=>{
 const getChatMessages = async(chatId)=>{
 
 
-    const chat = await Chat.findById(chatId);
-
-
-    if(!chat)
-        return [];
+const chat = await Chat.findById(chatId);
 
 
 
-    return chat.messages.map(msg=>({
+if(!chat)
+
+return [];
 
 
-        role:msg.role,
 
 
-        content:msg.content
+return chat.messages.map(msg=>({
 
 
-    }));
+role:msg.role,
+
+
+content:msg.content
+
+
+}));
+
 
 
 };
+
 
 
 

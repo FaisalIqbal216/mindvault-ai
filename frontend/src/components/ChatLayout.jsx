@@ -1,43 +1,75 @@
-import { useState } from "react";
+import {
+useState
+} from "react";
 
-import ChatHeader from "./ChatHeader";
+
 import ChatWindow from "./ChatWindow";
 import ChatInput from "./ChatInput";
+import ChatHeader from "./ChatHeader";
 
-import { sendMessage } from "../services/api";
+import Sidebar from "../sidebar/Sidebar";
+
+
+import {
+sendMessage
+} from "../services/api";
+
+
+import {
+getChatById
+} from "../services/chatService";
+
+
+
+
+
 
 
 function ChatLayout(){
 
 
-const [messages,setMessages] = useState([]);
 
+const [messages,setMessages]=useState([]);
 
-const [loading,setLoading] = useState(false);
+const [loading,setLoading]=useState(false);
 
-
-
-const [chatId,setChatId] = useState(null);
+const [chatId,setChatId]=useState(null);
 
 
 
+// sidebar state
+
+const [sidebarOpen,setSidebarOpen]=useState(true);
+
+
+
+// current chat title
+
+const [activeChatTitle,setActiveChatTitle]=useState("");
+
+
+
+
+
+
+
+
+
+// ===============================
+// SEND MESSAGE
+// ===============================
 
 
 const handleSend = async(message)=>{
 
 
-// User message show immediately
-
-setMessages((prev)=>[
+setMessages(prev=>[
 
 ...prev,
 
 {
-
 sender:"user",
-
 text:message
-
 }
 
 ]);
@@ -51,7 +83,6 @@ setLoading(true);
 try{
 
 
-
 const response = await sendMessage(
 
 message,
@@ -62,63 +93,66 @@ chatId
 
 
 
-// Save conversation ID
+
 
 if(response.chatId){
 
+
 setChatId(response.chatId);
+
+
+
+window.dispatchEvent(
+
+new Event("chatUpdated")
+
+);
+
 
 }
 
 
 
 
-setMessages((prev)=>[
+
+
+setMessages(prev=>[
 
 ...prev,
 
 {
-
 sender:"ai",
-
 text:response.answer
-
 }
 
 ]);
 
 
 
-
 }
+
+
 
 catch(error){
 
 
-console.log(
-"Chat Error:",
-error
-);
+console.log(error);
 
 
 
-setMessages((prev)=>[
+setMessages(prev=>[
 
 ...prev,
 
 {
-
 sender:"ai",
-
-text:"Sorry, something went wrong."
-
+text:"Something went wrong."
 }
 
 ]);
 
 
 }
-
 
 
 
@@ -133,13 +167,89 @@ setLoading(false);
 
 
 
-const newChat=()=>{
 
 
-setMessages([]);
+
+// ===============================
+// OPEN OLD CHAT
+// ===============================
 
 
-setChatId(null);
+const openChat = async(chat)=>{
+
+
+try{
+
+
+const data = await getChatById(
+
+chat._id
+
+);
+
+
+
+setChatId(data._id);
+
+
+
+setActiveChatTitle(data.title);
+
+
+
+
+
+
+const formattedMessages = data.messages.map(msg=>(
+
+
+{
+
+sender:
+
+msg.role==="user"
+
+?
+
+"user"
+
+:
+
+"ai",
+
+
+text:msg.content
+
+}
+
+
+));
+
+
+
+
+
+setMessages(formattedMessages);
+
+
+
+}
+
+
+catch(error){
+
+
+console.log(
+
+"Load chat error",
+
+error
+
+);
+
+
+
+}
 
 
 };
@@ -149,44 +259,152 @@ setChatId(null);
 
 
 
+
+
+
+// ===============================
+// NEW CHAT
+// ===============================
+
+
+const newChat=()=>{
+
+
+setMessages([]);
+
+
+setChatId(null);
+
+
+setActiveChatTitle("");
+
+
+
+};
+
+
+
+
+
+
+
+
+
+
+
 return(
 
 
-<div className="ai-app">
+<div className="dashboard">
+
+
+
+
+
+
+<Sidebar
+
+
+open={sidebarOpen}
+
+
+activeChat={chatId}
+
+
+onSelectChat={openChat}
+
+
+onNewChat={newChat}
+
+
+/>
+
+
+
+
+
+
+
+
+<div className="dashboard-main">
+
+
+
+
 
 
 <ChatHeader
 
+
 onNewChat={newChat}
+
+
+onToggleSidebar={()=>setSidebarOpen(!sidebarOpen)}
+
+
+sidebarOpen={sidebarOpen}
+
+
+activeChat={activeChatTitle}
+
 
 />
 
 
 
-<main className="ai-main">
+
+
+
+
+
+
+<div className="chat-content">
+
 
 
 <ChatWindow
 
+
 messages={messages}
 
+
 loading={loading}
+
 
 />
 
 
-</main>
+
+</div>
+
+
+
+
+
 
 
 
 
 <ChatInput
 
+
 onSend={handleSend}
+
 
 loading={loading}
 
+
 />
+
+
+
+
+
+
+
+</div>
+
+
 
 
 
@@ -195,6 +413,7 @@ loading={loading}
 
 
 );
+
 
 
 }

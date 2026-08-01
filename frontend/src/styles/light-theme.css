@@ -1,0 +1,1181 @@
+/* ==========================================
+   LIGHT THEME COMPLETE COLOR SYSTEM
+========================================== */
+
+
+body.light{
+
+background:#f8fafc;
+
+color:#0f172a;
+
+}
+
+
+
+
+
+/* ==========================================
+   HEADER
+========================================== */
+
+
+body.light .ai-header{
+
+background:#ffffff;
+
+border-bottom:1px solid #e2e8f0;
+
+}
+
+
+
+body.light .ai-brand-text h1{
+
+color:#0f172a;
+
+}
+
+
+
+body.light .ai-brand-text span{
+
+color:#64748b;
+
+}
+
+
+
+body.light .header-center h3{
+
+color:#1e293b;
+
+}
+
+
+
+body.light .header-user-info h4{
+
+color:#0f172a;
+
+}
+
+
+
+body.light .header-user-info p{
+
+color:#64748b;
+
+}
+
+
+
+body.light .sidebar-toggle{
+
+background:#ffffff;
+
+color:#334155;
+
+border:1px solid #e2e8f0;
+
+}
+
+
+
+body.light .sidebar-toggle:hover{
+
+background:#eef2ff;
+
+color:#6366f1;
+
+}
+
+
+
+
+
+/* ==========================================
+   SIDEBAR
+========================================== */
+
+
+body.light .sidebar{
+
+background:#ffffff;
+
+border-right:1px solid #e2e8f0;
+
+}
+
+
+
+body.light .sidebar-title h2{
+
+color:#0f172a;
+
+}
+
+
+
+body.light .sidebar-title span{
+
+color:#64748b;
+
+}
+
+
+
+
+
+/* ==========================================
+   SEARCH
+========================================== */
+
+
+body.light .search-box{
+
+background:#f8fafc;
+
+border:1px solid #dbe3ef;
+
+}
+
+
+
+body.light .search-box input{
+
+color:#0f172a;
+
+}
+
+
+
+body.light .search-box input::placeholder{
+
+color:#94a3b8;
+
+}
+
+
+
+body.light .search-box:focus-within{
+
+border-color:#6366f1;
+
+}
+
+
+
+
+
+/* ==========================================
+   CHAT LIST
+========================================== */
+
+
+body.light .chat-item{
+
+background:#ffffff;
+
+color:#334155;
+
+}
+
+
+
+body.light .chat-item:hover{
+
+background:#eef2ff;
+
+}
+
+
+
+body.light .chat-item.active{
+
+background:#eef2ff;
+
+}
+
+
+
+body.light .chat-info h4{
+
+color:#0f172a;
+
+}
+
+
+
+body.light .chat-info span{
+
+color:#64748b;
+
+}
+
+
+
+
+
+/* ==========================================
+   PROFILE AREA SIDEBAR
+========================================== */
+
+
+body.light .profile-box{
+
+background:#ffffff;
+
+border-top:1px solid #e2e8f0;
+
+}
+
+
+
+body.light .profile-details h4{
+
+color:#0f172a;
+
+}
+
+
+
+body.light .profile-details p{
+
+color:#64748b;
+
+}
+
+
+
+
+
+body.light .logout-btn{
+
+background:#ef4444;
+
+color:white;
+
+}
+
+
+
+
+
+/* ==========================================
+   CHAT WINDOW
+========================================== */
+
+
+body.light .ai-chat-window{
+
+background:#f8fafc;
+
+}
+
+
+
+body.light .ai-empty-state h2{
+
+color:#0f172a;
+
+}
+
+
+
+body.light .ai-empty-state p{
+
+color:#64748b;
+
+}
+
+
+
+
+
+/* ==========================================
+   MESSAGE
+========================================== */
+
+
+body.light .message-card{
+
+background:#ffffff;
+
+border:1px solid #e2e8f0;
+
+color:#0f172a;
+
+}
+
+
+
+body.light .message-name{
+
+color:#475569;
+
+}
+
+
+
+body.light .markdown-content{
+
+color:#1e293b;
+
+}
+
+
+
+body.light .markdown-content p{
+
+color:#1e293b;
+
+}
+
+
+
+body.light .markdown-content h1,
+body.light .markdown-content h2,
+body.light .markdown-content h3{
+
+color:#0f172a;
+
+}
+
+
+
+body.light .markdown-content li{
+
+color:#334155;
+
+}
+
+
+
+
+
+/* USER MESSAGE */
+
+
+body.light .user-row .message-card{
+
+background:#6366f1;
+
+color:white;
+
+border:none;
+
+}
+
+
+
+body.light .user-row .message-name{
+
+color:white;
+
+}
+
+
+
+body.light .user-row .markdown-content,
+body.light .user-row .markdown-content p{
+
+color:white;
+
+}
+
+
+
+
+
+/* ==========================================
+   INPUT AREA
+========================================== */
+
+
+body.light .ai-composer{
+
+background:#ffffff;
+
+border-top:1px solid #e2e8f0;
+
+}
+
+
+
+body.light .ai-composer input{
+
+background:#ffffff;
+
+color:#0f172a;
+
+border:1px solid #dbe3ef;
+
+}
+
+
+
+body.light .ai-composer input::placeholder{
+
+color:#94a3b8;
+
+}
+
+
+
+body.light .ai-composer input:focus{
+
+border-color:#6366f1;
+
+}
+
+
+
+
+
+body.light .ai-composer button{
+
+background:#6366f1;
+
+color:white;
+
+}
+
+
+
+
+
+/* ==========================================
+   PROFILE DROPDOWN
+========================================== */
+
+
+body.light .profile-dropdown{
+
+background:#ffffff;
+
+border:1px solid #e2e8f0;
+
+}
+
+
+
+body.light .profile-dropdown button{
+
+color:#334155;
+
+}
+
+
+
+body.light .profile-dropdown button:hover{
+
+background:#eef2ff;
+
+color:#6366f1;
+
+}
+
+
+
+
+
+/* ==========================================
+   PROFILE MODAL
+========================================== */
+
+
+body.light .modal-overlay{
+
+background:rgba(15,23,42,.35);
+
+}
+
+
+
+body.light .profile-modal{
+
+background:#ffffff;
+
+color:#0f172a;
+
+}
+
+
+
+body.light .profile-modal h2{
+
+color:#0f172a;
+
+}
+
+
+
+body.light .profile-email{
+
+color:#64748b;
+
+}
+
+
+
+body.light .profile-info-box > div{
+
+background:#f8fafc;
+
+}
+
+
+
+body.light .profile-info-box span{
+
+color:#64748b;
+
+}
+
+
+
+body.light .profile-info-box strong{
+
+color:#0f172a;
+
+}
+
+
+
+
+
+/* ==========================================
+   SETTINGS MODAL
+========================================== */
+
+
+body.light .settings-modal{
+
+background:#ffffff;
+
+color:#0f172a;
+
+}
+
+
+
+body.light .settings-modal h2{
+
+color:#0f172a;
+
+}
+
+
+
+body.light .setting-item{
+
+background:#f8fafc;
+
+}
+
+
+
+body.light .setting-item h4{
+
+color:#0f172a;
+
+}
+
+
+
+body.light .setting-item p{
+
+color:#64748b;
+
+}
+
+
+
+
+
+/* SWITCH */
+
+
+body.light .switch span{
+
+background:#cbd5e1;
+
+}
+
+
+
+body.light .switch input:checked + span{
+
+background:#6366f1;
+
+}
+
+
+
+
+
+/* ==========================================
+   BUTTON HOVER
+========================================== */
+
+
+body.light button{
+
+transition:.25s ease;
+
+}
+
+
+
+body.light button:hover{
+
+filter:brightness(.97);
+
+}
+
+
+
+
+
+/* ==========================================
+   SCROLLBAR
+========================================== */
+
+
+body.light ::-webkit-scrollbar-thumb{
+
+background:#cbd5e1;
+
+}
+
+
+body.light ::-webkit-scrollbar-thumb:hover{
+
+background:#94a3b8;
+
+}
+
+
+/* =====================================
+   FINAL LIGHT MODE COLOR POLISH
+===================================== */
+
+
+/* ALL TEXT DEFAULT */
+
+body.light{
+
+color:#0f172a;
+
+}
+
+
+
+
+/* ALL COMMON TEXT */
+
+body.light p,
+body.light span,
+body.light div{
+
+color:inherit;
+
+}
+
+
+
+/* HEADER */
+
+body.light .ai-header{
+
+background:#ffffff;
+
+color:#0f172a;
+
+}
+
+
+
+body.light h1,
+body.light h2,
+body.light h3,
+body.light h4{
+
+color:#0f172a;
+
+}
+
+
+
+
+
+/* SIDEBAR */
+
+body.light .sidebar{
+
+background:#ffffff;
+
+}
+
+
+
+body.light .sidebar *{
+
+color:#334155;
+
+}
+
+
+
+body.light .sidebar-title h2{
+
+color:#0f172a;
+
+}
+
+
+
+body.light .sidebar-title span{
+
+color:#64748b;
+
+}
+
+
+
+
+/* SEARCH */
+
+body.light .search-box{
+
+background:#f8fafc;
+
+}
+
+
+
+body.light .search-box input{
+
+color:#0f172a;
+
+}
+
+
+
+body.light .search-box input::placeholder{
+
+color:#94a3b8;
+
+}
+
+
+
+
+
+/* CHAT AREA */
+
+body.light .ai-chat-window{
+
+background:#f8fafc;
+
+}
+
+
+
+
+
+/* AI MESSAGE */
+
+body.light .message-card{
+
+background:#ffffff;
+
+color:#0f172a;
+
+}
+
+
+
+body.light .message-card *{
+
+color:#1e293b;
+
+}
+
+
+
+
+
+/* USER MESSAGE */
+
+body.light .user-row .message-card{
+
+background:#6366f1;
+
+}
+
+
+
+body.light .user-row .message-card *{
+
+color:white;
+
+}
+
+
+
+
+
+/* INPUT */
+
+body.light .ai-composer{
+
+background:#ffffff;
+
+}
+
+
+
+body.light .ai-composer input{
+
+background:#ffffff;
+
+color:#0f172a;
+
+}
+
+
+
+body.light .ai-composer input::placeholder{
+
+color:#94a3b8;
+
+}
+
+
+
+
+
+/* DROPDOWN */
+
+body.light .profile-dropdown{
+
+background:#ffffff;
+
+}
+
+
+
+body.light .profile-dropdown *{
+
+color:#334155;
+
+}
+
+
+
+
+
+/* MODALS */
+
+body.light .profile-modal,
+body.light .settings-modal{
+
+background:#ffffff;
+
+color:#0f172a;
+
+}
+
+
+
+body.light .profile-modal *,
+body.light .settings-modal *{
+
+color:#334155;
+
+}
+
+
+
+
+body.light .profile-modal h2,
+body.light .settings-modal h2{
+
+color:#0f172a;
+
+}
+
+
+
+
+
+/* INFO BOX */
+
+body.light .profile-info-box > div,
+body.light .setting-item{
+
+background:#f8fafc;
+
+}
+
+
+
+
+/* BUTTON TEXT KEEP WHITE */
+
+
+body.light .ai-new-chat *,
+body.light .save-settings *,
+body.light .save-profile *{
+
+color:white;
+
+}
+
+
+
+/* =====================================
+   CHAT ITEM MENU FINAL CLEAN VERSION
+===================================== */
+
+body.light .chat-actions{
+    position:relative;
+    display:flex;
+    align-items:center;
+}
+
+body.light .chat-actions .chat-menu{
+    width:32px;
+    height:32px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:transparent;
+    border:none;
+    outline:none;
+
+    border-radius:10px;
+    color:#64748b;
+
+    font-size:24px;
+    font-weight:700;
+
+    cursor:pointer;
+    opacity:0;
+    transition:.25s ease;
+}
+
+body.light .chat-item:hover .chat-menu{
+    opacity:1;
+}
+
+body.light .chat-menu:hover{
+    background:#eef2ff;
+    color:#6366f1;
+}
+
+body.light .chat-dropdown{
+    position:absolute;
+    right:0;
+    top:40px;
+
+    width:190px;
+    padding:8px;
+
+    background:#ffffff;
+
+    border:1px solid #e2e8f0;
+    border-radius:14px;
+
+    box-shadow:0 18px 45px rgba(15,23,42,.16);
+
+    z-index:99999;
+}
+
+body.light .chat-dropdown button{
+    width:100%;
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    padding:11px 12px;
+
+    border:none;
+    border-radius:10px;
+
+    background:transparent;
+    color:#334155;
+
+    cursor:pointer;
+    font-size:14px;
+}
+
+body.light .chat-dropdown button:hover{
+    background:#eef2ff;
+    color:#6366f1;
+}
+
+body.light .chat-dropdown .delete-option{
+    color:#ef4444;
+}
+
+body.light .chat-dropdown .delete-option:hover{
+    background:#fee2e2;
+    color:#dc2626;
+}
+
+body.light .delete-overlay{
+    background:rgba(15,23,42,.35);
+    backdrop-filter:blur(5px);
+}
+
+body.light .delete-modal{
+    background:#ffffff;
+    color:#0f172a;
+    border:1px solid #e2e8f0;
+    box-shadow:0 25px 60px rgba(15,23,42,.18);
+}
+
+body.light .delete-modal h3{
+    color:#0f172a;
+}
+
+body.light .delete-modal p{
+    color:#64748b;
+}
+
+body.light .cancel-delete{
+    background:#e2e8f0;
+    color:#334155;
+}
+
+body.light .confirm-delete{
+    background:#ef4444;
+    color:white;
+}
+
+
+/* =====================================
+   FORCE PROFILE MODAL LIGHT FIX
+===================================== */
+
+
+/* CLOSE X BUTTON */
+
+body.light button.close-btn,
+body.light button[class*="close"],
+body.light .modal-close,
+body.light .profile-close,
+body.light .settings-close{
+
+    background:#f1f5f9 !important;
+    color:#334155 !important;
+    border:1px solid #e2e8f0 !important;
+
+}
+
+
+
+body.light button.close-btn svg,
+body.light button[class*="close"] svg,
+body.light .modal-close svg,
+body.light .profile-close svg,
+body.light .settings-close svg{
+
+    color:#334155 !important;
+
+}
+
+
+
+
+
+/* PROFILE EDIT BUTTON */
+
+body.light button[class*="edit"],
+body.light button[class*="profile"]{
+
+    background:#334155 !important;
+
+    color:white !important;
+
+}
+
+
+
+body.light button[class*="edit"] svg,
+body.light button[class*="profile"] svg{
+
+    color:white !important;
+
+}
+
+
+
+
+
+/* REMOVE DARK HOVER */
+
+body.light button:hover{
+
+    filter:none;
+
+}
+
+
+
+/* =====================================
+   CHAT RENAME INPUT LIGHT FIX
+===================================== */
+
+
+body.light .chat-info input{
+
+    width:100%;
+
+    height:38px;
+
+    padding:0 12px;
+
+    border-radius:10px;
+
+    border:1px solid #6366f1;
+
+    background:#ffffff;
+
+    color:#0f172a;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    outline:none;
+
+    box-shadow:0 0 0 3px rgba(99,102,241,0.15);
+
+}
+
+
+
+body.light .chat-info input:focus{
+
+    border-color:#6366f1;
+
+    background:#ffffff;
+
+    color:#0f172a;
+
+}
+
+
+
+body.light .chat-info input::selection{
+
+    background:#c7d2fe;
+
+    color:#1e1b4b;
+
+}
