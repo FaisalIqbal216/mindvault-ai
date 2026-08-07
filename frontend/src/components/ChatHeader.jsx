@@ -45,6 +45,9 @@ updateProfile
 
 
 
+import {
+getChats
+} from "../services/chatService";
 
 
 
@@ -96,7 +99,7 @@ const [settingsOpen,setSettingsOpen]=useState(false);
 
 const dropdownRef = useRef(null);
 
-
+const [chatCount,setChatCount]=useState(0);
 
 
 
@@ -185,6 +188,49 @@ loadSettings();
 
 
 
+useEffect(()=>{
+
+const loadChatCount=async()=>{
+
+try{
+
+const chats = await getChats();
+
+setChatCount(chats.length);
+
+}
+catch(error){
+
+console.log(
+"Chat count error",
+error
+);
+
+}
+
+};
+
+
+loadChatCount();
+
+
+window.addEventListener(
+"chatUpdated",
+loadChatCount
+);
+
+
+return()=>{
+
+window.removeEventListener(
+"chatUpdated",
+loadChatCount
+);
+
+};
+
+
+},[]);
 
 
 
@@ -819,18 +865,15 @@ Logout
 
 <ProfileModal
 
-
 open={profileOpen}
-
 
 onClose={()=>setProfileOpen(false)}
 
-
 user={user}
 
+chatCount={chatCount}
 
 onUpdate={handleProfileUpdate}
-
 
 />
 

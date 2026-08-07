@@ -923,6 +923,56 @@ background:#f8fafc;
 
 
 
+/* =====================================
+   LIGHT PROFILE EDIT INPUT FIX
+===================================== */
+
+
+body.light .profile-edit-input{
+
+background:#f8fafc;
+
+border:1px solid #cbd5e1;
+
+color:#0f172a;
+
+font-size:28px;
+
+font-weight:700;
+
+text-align:center;
+
+border-radius:12px;
+
+outline:none;
+
+padding:12px 20px;
+
+transition:.25s ease;
+
+}
+
+
+
+body.light .profile-edit-input:focus{
+
+border-color:#6366f1;
+
+box-shadow:0 0 0 3px rgba(99,102,241,.15);
+
+}
+
+
+
+body.light .profile-edit-input::selection{
+
+background:#6366f1;
+
+color:white;
+
+}
+
+
 /* BUTTON TEXT KEEP WHITE */
 
 
@@ -1177,5 +1227,612 @@ body.light .chat-info input::selection{
     background:#c7d2fe;
 
     color:#1e1b4b;
+
+}
+
+body.light .markdown-content pre,
+body.light .markdown-content code{
+    background:#f8fafc;
+    color:#0f172a;
+}
+
+
+body.light .markdown-content pre{
+
+    border:1px solid #e2e8f0;
+
+    border-radius:14px;
+
+    padding:18px;
+
+    overflow-x:auto;
+
+}
+
+
+body.light .markdown-content pre code{
+
+    background:transparent;
+
+    color:#0f172a;
+
+}
+
+/* =====================================
+   LIGHT AI MESSAGE ACTION BUTTON FIX
+===================================== */
+
+
+body.light .ai-row .ai-message-action-btn,
+body.light .message-row:not(.user-row) .ai-message-action-btn{
+
+
+background:#ffffff !important;
+
+border:1px solid #dbe3ef !important;
+
+color:#334155 !important;
+
+
+}
+
+
+
+body.light .ai-row .ai-message-action-btn svg,
+body.light .message-row:not(.user-row) .ai-message-action-btn svg{
+
+
+color:#334155 !important;
+
+
+}
+
+
+
+body.light .ai-row .ai-message-action-btn:hover,
+body.light .message-row:not(.user-row) .ai-message-action-btn:hover{
+
+
+background:#eef2ff !important;
+
+border-color:#6366f1 !important;
+
+color:#6366f1 !important;
+
+
+}
+
+
+
+body.light .ai-row .ai-message-action-btn:hover svg,
+body.light .message-row:not(.user-row) .ai-message-action-btn:hover svg{
+
+
+color:#6366f1 !important;
+
+
+}
+
+
+/* =====================================
+   LIGHT THEME CHAT COMPOSER FINAL
+===================================== */
+
+
+/* Whole bottom area white */
+
+body.light .chat-content,
+body.light .dashboard-main,
+body.light .ai-chat-window{
+
+background:#ffffff !important;
+
+}
+
+
+
+/* Composer */
+
+body.light .ai-composer{
+
+
+position:relative;
+
+
+width:100%;
+
+
+display:flex;
+
+
+align-items:center;
+
+
+gap:14px;
+
+
+background:#ffffff !important;
+
+
+border:none !important;
+
+
+outline:none !important;
+
+
+box-shadow:none !important;
+
+
+border-radius:22px 22px 0 0;
+
+
+padding:14px 22px;
+
+
+box-sizing:border-box;
+
+
+}
+
+
+
+
+/* Remove black outer line */
+
+body.light .ai-composer::before,
+body.light .ai-composer::after{
+
+
+display:none !important;
+
+
+}
+
+
+
+
+/* Input wrapper */
+
+body.light .ai-input-area{
+
+
+flex:1;
+
+
+min-width:0;
+
+
+}
+
+
+
+
+
+/* Text input */
+
+
+body.light .ai-input-area input{
+
+
+width:100%;
+
+
+height:52px;
+
+
+background:#ffffff !important;
+
+
+border:none !important;
+
+
+outline:none !important;
+
+
+box-shadow:none !important;
+
+
+font-size:17px;
+
+
+color:#111827;
+
+
+padding:0 16px;
+
+
+}
+
+
+
+body.light .ai-input-area input::placeholder{
+
+
+color:#94a3b8;
+
+
+}
+
+
+
+
+body.light .ai-input-area input:focus{
+
+
+border:none !important;
+
+
+outline:none !important;
+
+
+box-shadow:none !important;
+
+
+}
+
+
+
+
+
+
+
+/* Plus Button */
+
+
+body.light .ai-plus-btn{
+
+
+width:46px;
+
+
+height:46px;
+
+
+flex-shrink:0;
+
+
+border-radius:50%;
+
+
+border:none;
+
+
+background:#6366f1;
+
+
+color:white;
+
+
+font-size:26px;
+
+
+display:flex;
+
+
+align-items:center;
+
+
+justify-content:center;
+
+
+cursor:pointer;
+
+
+}
+
+
+
+
+
+/* Send Button */
+
+
+body.light .ai-send-btn{
+
+
+width:46px;
+
+
+height:46px;
+
+
+flex-shrink:0;
+
+
+border-radius:14px;
+
+
+border:none;
+
+
+background:#6366f1;
+
+
+color:white;
+
+
+font-size:22px;
+
+
+display:flex;
+
+
+align-items:center;
+
+
+justify-content:center;
+
+
+}
+
+
+
+
+
+/* Upload Menu */
+
+
+body.light .ai-upload-menu{
+
+
+position:absolute;
+
+
+bottom:65px;
+
+
+left:0;
+
+
+width:220px;
+
+
+background:#ffffff;
+
+
+border:1px solid #e2e8f0;
+
+
+border-radius:14px;
+
+
+padding:8px;
+
+
+box-shadow:0 15px 35px rgba(0,0,0,.15);
+
+
+z-index:99999;
+
+
+}
+
+
+
+
+
+body.light .ai-upload-menu button{
+
+
+width:100%;
+
+
+height:42px;
+
+
+background:none;
+
+
+border:none;
+
+
+border-radius:10px;
+
+
+display:flex;
+
+
+align-items:center;
+
+
+gap:12px;
+
+
+padding:0 12px;
+
+
+font-size:15px;
+
+
+color:#334155;
+
+
+cursor:pointer;
+
+
+}
+
+
+
+
+
+body.light .ai-upload-menu button:hover{
+
+
+background:#f1f5f9;
+
+
+}
+
+
+
+
+
+
+/* File preview */
+
+
+body.light .ai-file-preview{
+
+
+background:#f1f5f9;
+
+
+color:#334155;
+
+
+border-radius:10px;
+
+
+}
+
+
+/* =====================================
+   LIGHT UPLOAD POPUP FIX
+===================================== */
+
+
+body.light .ai-upload-menu{
+
+    position:absolute;
+
+    bottom:65px;
+
+    left:0;
+
+    width:220px;
+
+    background:#ffffff !important;
+
+    border:1px solid #e2e8f0;
+
+    border-radius:14px;
+
+    padding:8px;
+
+    box-shadow:0 15px 35px rgba(15,23,42,.15);
+
+    z-index:99999;
+
+    box-sizing:border-box;
+
+    overflow:hidden;
+
+}
+
+
+
+
+
+body.light .ai-upload-menu button{
+
+
+    width:100%;
+
+
+    height:38px;
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    justify-content:flex-start;
+
+
+    gap:10px;
+
+
+    padding:0 10px;
+
+
+    background:transparent !important;
+
+
+    border:none;
+
+
+    border-radius:8px;
+
+
+    color:#334155 !important;
+
+
+    font-size:14px;
+
+
+    font-weight:500;
+
+
+    cursor:pointer;
+
+
+    white-space:nowrap;
+
+
+    box-sizing:border-box;
+
+
+}
+
+
+
+
+
+body.light .ai-upload-menu button span{
+
+
+    width:18px;
+
+
+    height:18px;
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    justify-content:center;
+
+
+    font-size:14px;
+
+
+    color:#334155;
+
+
+    flex-shrink:0;
+
+
+}
+
+
+
+
+
+body.light .ai-upload-menu button:hover{
+
+
+    background:#f1f5f9 !important;
+
+
+    color:#6366f1 !important;
+
+
+}
+
+
+
+
+
+body.light .ai-upload-menu button:hover span{
+
+
+    color:#6366f1;
+
 
 }

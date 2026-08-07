@@ -1,0 +1,585 @@
+/* =====================================
+   MESSAGE ACTION BUTTONS
+===================================== */
+
+
+.ai-message-actions{
+
+display:flex;
+
+align-items:center;
+
+gap:8px;
+
+margin-top:14px;
+
+opacity:0;
+
+transition:.25s ease;
+
+}
+
+
+
+
+.message-card:hover .ai-message-actions{
+
+opacity:1;
+
+}
+
+
+
+
+.ai-message-action-btn{
+
+
+display:flex;
+
+align-items:center;
+
+gap:6px;
+
+
+height:30px;
+
+
+padding:0 10px;
+
+
+border-radius:8px;
+
+
+border:1px solid rgba(255,255,255,.1);
+
+
+background:#1e293b;
+
+
+color:#cbd5e1;
+
+
+font-size:12px;
+
+
+cursor:pointer;
+
+
+transition:.25s ease;
+
+
+}
+
+
+
+
+.ai-message-action-btn svg{
+
+width:14px;
+
+height:14px;
+
+}
+
+
+
+
+
+.ai-message-action-btn:hover{
+
+
+background:#334155;
+
+
+color:white;
+
+
+transform:translateY(-1px);
+
+
+}
+
+
+
+
+.ai-copy-action:hover{
+
+color:#60a5fa;
+
+}
+
+
+
+.ai-edit-action:hover{
+
+color:#a78bfa;
+
+}
+
+
+
+.ai-retry-action:hover{
+
+color:#34d399;
+
+}
+
+/* =====================================
+   NORMAL DARK CHAT INPUT FINAL
+===================================== */
+
+
+/* Chat Area */
+
+.chat-content,
+.dashboard-main,
+.ai-chat-window{
+
+    background:#020617 !important;
+
+}
+
+
+
+/* =====================================
+   MAIN COMPOSER
+===================================== */
+
+
+.ai-composer{
+
+    position:relative;
+
+    width:100%;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    background:#1e293b !important;
+
+    border:none !important;
+
+    outline:none !important;
+
+    box-shadow:none !important;
+
+    border-radius:22px 22px 0 0;
+
+    padding:12px 18px;
+
+    box-sizing:border-box;
+
+}
+
+
+
+.ai-composer::before,
+.ai-composer::after{
+
+    display:none !important;
+
+}
+
+
+
+/* =====================================
+   PLUS WRAPPER
+===================================== */
+
+
+.ai-plus-wrapper{
+
+    position:relative;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    flex-shrink:0;
+
+}
+
+
+
+/* =====================================
+   PLUS BUTTON
+===================================== */
+
+
+.ai-plus-btn{
+
+    width:40px;
+
+    height:40px;
+
+    border-radius:50%;
+
+    border:none;
+
+    background:#6366f1;
+
+    color:white;
+
+    font-size:20px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    cursor:pointer;
+
+    transition:.2s ease;
+
+}
+
+
+
+.ai-plus-btn:hover{
+
+    background:#4f46e5;
+
+    transform:translateY(-1px);
+
+}
+
+
+
+
+
+/* =====================================
+   INPUT AREA
+===================================== */
+
+
+.ai-input-area{
+
+    flex:1;
+
+    min-width:0;
+
+    display:flex;
+
+    align-items:center;
+
+}
+
+
+
+.ai-input-area input{
+
+
+    width:100%;
+
+    height:46px;
+
+    background:transparent !important;
+
+    border:none !important;
+
+    outline:none !important;
+
+    box-shadow:none !important;
+
+
+    color:#f8fafc;
+
+
+    font-size:16px;
+
+
+    padding:0 12px;
+
+
+    box-sizing:border-box;
+
+
+}
+
+
+
+.ai-input-area input::placeholder{
+
+    color:#94a3b8;
+
+}
+
+
+
+.ai-input-area input:focus{
+
+    border:none !important;
+
+    outline:none !important;
+
+    box-shadow:none !important;
+
+}
+
+
+
+
+/* =====================================
+   SEND BUTTON
+===================================== */
+
+
+.ai-send-btn{
+
+    width:44px;
+
+    height:44px;
+
+    flex-shrink:0;
+
+    border-radius:12px;
+
+    border:none;
+
+    background:#6366f1;
+
+    color:white;
+
+    font-size:20px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    cursor:pointer;
+
+    transition:.2s ease;
+
+}
+
+
+
+
+.ai-send-btn:hover{
+
+    background:#4f46e5;
+
+    transform:translateY(-1px);
+
+}
+
+
+
+
+
+/* =====================================
+   UPLOAD POPUP FIXED
+===================================== */
+
+
+.ai-upload-menu{
+
+
+    position:absolute;
+
+
+    bottom:55px;
+
+
+    left:0;
+
+
+    width:210px;
+
+
+    background:#1e293b;
+
+
+    border:1px solid #334155;
+
+
+    border-radius:12px;
+
+
+    padding:8px;
+
+
+    box-shadow:0 15px 35px rgba(0,0,0,.45);
+
+
+    z-index:999999;
+
+
+    box-sizing:border-box;
+
+
+}
+
+
+
+
+
+.ai-upload-menu button{
+
+
+    width:100%;
+
+
+    height:38px;
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    justify-content:flex-start;
+
+
+    gap:10px;
+
+
+    padding:0 10px;
+
+
+    background:transparent !important;
+
+
+    border:none;
+
+
+    border-radius:8px;
+
+
+    color:#cbd5e1;
+
+
+    font-size:14px;
+
+
+    font-weight:500;
+
+
+    cursor:pointer;
+
+
+    box-sizing:border-box;
+
+
+}
+
+
+
+
+
+.ai-upload-menu button span{
+
+
+    width:18px;
+
+
+    height:18px;
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    justify-content:center;
+
+
+    background:transparent !important;
+
+
+    border-radius:0;
+
+
+    font-size:14px;
+
+
+    flex-shrink:0;
+
+
+}
+
+
+
+
+
+.ai-upload-menu button:hover{
+
+
+    background:#334155 !important;
+
+
+    color:white;
+
+
+}
+
+
+
+
+
+/* =====================================
+   FILE PREVIEW
+===================================== */
+
+
+.ai-file-preview{
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    justify-content:space-between;
+
+
+    gap:10px;
+
+
+    background:#334155;
+
+
+    color:#f8fafc;
+
+
+    border-radius:8px;
+
+
+    padding:6px 10px;
+
+
+    font-size:13px;
+
+
+}
+
+
+
+
+.ai-file-preview button{
+
+
+    border:none;
+
+
+    background:none;
+
+
+    color:#cbd5e1;
+
+
+    cursor:pointer;
+
+
+}

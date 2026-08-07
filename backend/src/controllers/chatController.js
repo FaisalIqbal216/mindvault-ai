@@ -1,8 +1,11 @@
 const {
-    createChat,
-    addMessage,
-    getChatMessages
+createChat,
+addMessage,
+getAIHistory
 } = require("../services/chatMemory");
+
+
+const processFile = require("../services/fileProcessor");
 
 
 const Chat = require("../models/Chat");
@@ -13,9 +16,15 @@ const getAIResponse = require("../services/aiService");
 
 
 
+
+
+
+
 // =================================
 // CREATE / CONTINUE CHAT
+// TEXT + FILE SUPPORT FINAL
 // =================================
+
 
 const chatController = async(req,res)=>{
 
@@ -33,11 +42,16 @@ chatId
 
 
 
+
 const userId = req.user.id;
+
+
+const file = req.file;
 
 
 
 let currentChatId = chatId;
+
 
 
 
@@ -53,13 +67,112 @@ currentChatId = await createChat(userId);
 
 
 
+
+
+// ===============================
+// PROCESS ATTACHMENT
+// ===============================
+
+
+let attachment = null;
+
+let fileContext = "";
+
+
+
+
+
+if(file){
+
+
+
+const processedFile = await processFile(file);
+
+
+
+
+attachment={
+
+
+name:processedFile.name,
+
+
+type:processedFile.type,
+
+
+mimeType:processedFile.mimeType,
+
+
+size:processedFile.size,
+
+
+uploadedAt:new Date()
+
+
+};
+
+
+
+
+
+fileContext = `
+
+
+User uploaded a file.
+
+
+
+File Name:
+${processedFile.name}
+
+
+
+File Type:
+${processedFile.type}
+
+
+
+Mime Type:
+${processedFile.mimeType}
+
+
+
+
+Extracted Content:
+
+
+${processedFile.content}
+
+
+
+`;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+// ===============================
+// SAVE USER MESSAGE
+// ===============================
+
+
 await addMessage(
 
 currentChatId,
 
 "user",
 
-message
+message || "Uploaded file",
+
+attachment
 
 );
 
@@ -68,7 +181,17 @@ message
 
 
 
-const history = await getChatMessages(
+
+
+
+
+
+// ===============================
+// GET CHAT HISTORY
+// ===============================
+
+
+const history = await getAIHistory(
 
 currentChatId
 
@@ -78,11 +201,59 @@ currentChatId
 
 
 
+
+
+
+
+// ===============================
+// ADD FILE CONTEXT FOR AI
+// ===============================
+
+
+if(fileContext){
+
+
+
+history.push({
+
+
+role:"user",
+
+
+content:fileContext
+
+
+
+});
+
+
+}
+
+
+
+
+
+
+
+
+
+// ===============================
+// GENERATE AI RESPONSE
+// ===============================
+
+
 const answer = await getAIResponse(history);
 
 
 
 
+
+
+
+
+// ===============================
+// SAVE AI RESPONSE
+// ===============================
 
 
 await addMessage(
@@ -100,6 +271,7 @@ answer
 
 
 
+
 res.status(200).json({
 
 chatId:currentChatId,
@@ -110,6 +282,8 @@ answer
 
 
 
+
+
 }
 
 
@@ -117,10 +291,15 @@ answer
 catch(error){
 
 
+
 console.log(
+
 "CHAT ERROR:",
+
 error
+
 );
+
 
 
 
@@ -131,7 +310,9 @@ message:"Chat failed"
 });
 
 
+
 }
+
 
 
 };
@@ -144,9 +325,480 @@ message:"Chat failed"
 
 
 
+
+
+
+// =================================
+// EDIT MESSAGE
+// =================================
+
+
+const editMessage = async(req,res)=>{
+
+
+try{
+
+
+const {
+
+chatId,
+
+messageId
+
+}=req.params;
+
+
+
+
+
+const {
+
+content
+
+}=req.body;
+
+
+
+
+
+
+
+const chat = await Chat.findOne({
+
+_id:chatId,
+
+userId:req.user.id
+
+});
+
+
+
+
+
+
+
+if(!chat){
+
+
+return res.status(404).json({
+
+message:"Chat not found"
+
+});
+
+
+}
+
+
+
+
+
+
+
+
+
+const messageIndex = chat.messages.findIndex(
+
+msg=>msg._id.toString()===messageId
+
+);
+
+
+
+
+
+
+
+if(messageIndex===-1){
+
+
+return res.status(404).json({
+
+message:"Message not found"
+
+});
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+// UPDATE USER MESSAGE
+
+
+chat.messages[messageIndex].content = content;
+
+
+
+
+
+
+
+
+
+// REMOVE OLD AI RESPONSE
+
+
+if(
+
+chat.messages[messageIndex+1] &&
+
+chat.messages[messageIndex+1].role==="assistant"
+
+){
+
+
+chat.messages.splice(
+
+messageIndex+1,
+
+1
+
+);
+
+
+}
+
+
+
+
+
+
+
+
+
+chat.updatedAt=new Date();
+
+
+await chat.save();
+
+
+
+
+
+
+
+
+
+
+
+// GENERATE NEW RESPONSE
+
+
+const history = await getAIHistory(chatId);
+
+
+
+const answer = await getAIResponse(history);
+
+
+
+
+
+
+
+
+
+chat.messages.push({
+
+role:"assistant",
+
+content:answer
+
+});
+
+
+
+
+
+
+await chat.save();
+
+
+
+
+
+
+
+
+
+res.status(200).json({
+
+answer,
+
+chatId
+
+});
+
+
+
+
+
+}
+
+
+
+catch(error){
+
+
+console.log(
+
+"EDIT MESSAGE ERROR",
+
+error
+
+);
+
+
+
+res.status(500).json({
+
+message:"Edit failed"
+
+});
+
+
+
+}
+
+
+
+};
+
+
+
+
+
+
+
+
+
+
+
+// =================================
+// RETRY AI MESSAGE
+// =================================
+
+
+const retryMessage = async(req,res)=>{
+
+
+try{
+
+
+const {
+
+chatId,
+
+messageId
+
+}=req.params;
+
+
+
+
+
+
+
+
+
+const chat = await Chat.findOne({
+
+_id:chatId,
+
+userId:req.user.id
+
+});
+
+
+
+
+
+
+
+
+if(!chat){
+
+
+return res.status(404).json({
+
+message:"Chat not found"
+
+});
+
+
+}
+
+
+
+
+
+
+
+
+const messageIndex = chat.messages.findIndex(
+
+msg=>msg._id.toString()===messageId
+
+);
+
+
+
+
+
+
+
+if(messageIndex===-1){
+
+
+return res.status(404).json({
+
+message:"Message not found"
+
+});
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+// REMOVE OLD AI MESSAGE
+
+
+if(
+
+chat.messages[messageIndex].role==="assistant"
+
+){
+
+
+chat.messages.splice(
+
+messageIndex,
+
+1
+
+);
+
+
+}
+
+
+
+
+
+
+
+
+
+const history = await getAIHistory(chatId);
+
+
+
+
+
+
+const answer = await getAIResponse(history);
+
+
+
+
+
+
+
+
+
+chat.messages.push({
+
+role:"assistant",
+
+content:answer
+
+});
+
+
+
+
+
+
+chat.updatedAt=new Date();
+
+
+
+await chat.save();
+
+
+
+
+
+
+
+
+res.status(200).json({
+
+answer
+
+});
+
+
+
+
+
+
+}
+
+
+
+catch(error){
+
+
+
+console.log(
+
+"RETRY ERROR",
+
+error
+
+);
+
+
+
+res.status(500).json({
+
+message:"Retry failed"
+
+});
+
+
+
+}
+
+
+
+};
+
+
+
 // =================================
 // GET ALL USER CHATS
 // =================================
+
 
 const getUserChats = async(req,res)=>{
 
@@ -154,14 +806,8 @@ const getUserChats = async(req,res)=>{
 try{
 
 
-const userId = req.user.id;
+const userId=req.user.id;
 
-
-
-console.log(
-"LOGIN USER ID:",
-userId
-);
 
 
 
@@ -172,16 +818,23 @@ const chats = await Chat.find({
 userId:userId,
 
 
+
 $or:[
 
 {
+
 archived:false
+
 },
 
 {
+
 archived:{
+
 $exists:false
+
 }
+
 }
 
 ]
@@ -205,13 +858,6 @@ updatedAt:-1
 
 
 
-console.log(
-"TOTAL CHATS FOUND:",
-chats.length
-);
-
-
-
 
 
 res.status(200).json(chats);
@@ -219,6 +865,7 @@ res.status(200).json(chats);
 
 
 }
+
 
 
 catch(error){
@@ -241,6 +888,7 @@ message:"Unable to load chats"
 });
 
 
+
 }
 
 
@@ -255,9 +903,14 @@ message:"Unable to load chats"
 
 
 
+
+
+
+
 // =================================
 // GET SINGLE CHAT
 // =================================
+
 
 const getSingleChat = async(req,res)=>{
 
@@ -276,7 +929,10 @@ userId:req.user.id
 
 
 
+
+
 if(!chat){
+
 
 return res.status(404).json({
 
@@ -284,7 +940,10 @@ message:"Chat not found"
 
 });
 
+
 }
+
+
 
 
 
@@ -325,9 +984,13 @@ message:"Unable to load chat"
 
 
 
+
+
+
 // =================================
 // DELETE CHAT
 // =================================
+
 
 const deleteChat = async(req,res)=>{
 
@@ -346,7 +1009,10 @@ userId:req.user.id
 
 
 
+
+
 if(!deleted){
+
 
 return res.status(404).json({
 
@@ -354,7 +1020,11 @@ message:"Chat not found"
 
 });
 
+
 }
+
+
+
 
 
 
@@ -399,9 +1069,13 @@ message:"Delete failed"
 
 
 
+
+
+
 // =================================
 // RENAME CHAT
 // =================================
+
 
 const renameChat = async(req,res)=>{
 
@@ -411,6 +1085,7 @@ try{
 
 const chat = await Chat.findOneAndUpdate(
 
+
 {
 
 _id:req.params.id,
@@ -418,6 +1093,7 @@ _id:req.params.id,
 userId:req.user.id
 
 },
+
 
 
 {
@@ -429,26 +1105,18 @@ updatedAt:new Date()
 },
 
 
+
 {
 
 new:true
 
 }
 
+
+
 );
 
 
-
-
-if(!chat){
-
-return res.status(404).json({
-
-message:"Chat not found"
-
-});
-
-}
 
 
 
@@ -490,9 +1158,13 @@ message:"Rename failed"
 
 
 
+
+
+
 // =================================
 // PIN CHAT
 // =================================
+
 
 const pinChat = async(req,res)=>{
 
@@ -502,6 +1174,7 @@ try{
 
 const chat = await Chat.findOneAndUpdate(
 
+
 {
 
 _id:req.params.id,
@@ -509,6 +1182,7 @@ _id:req.params.id,
 userId:req.user.id
 
 },
+
 
 
 {
@@ -520,13 +1194,18 @@ updatedAt:new Date()
 },
 
 
+
 {
 
 new:true
 
 }
 
+
 );
+
+
+
 
 
 
@@ -567,9 +1246,13 @@ message:"Pin failed"
 
 
 
+
+
+
 // =================================
 // ARCHIVE CHAT
 // =================================
+
 
 const archiveChat = async(req,res)=>{
 
@@ -579,6 +1262,7 @@ try{
 
 const chat = await Chat.findOneAndUpdate(
 
+
 {
 
 _id:req.params.id,
@@ -586,6 +1270,7 @@ _id:req.params.id,
 userId:req.user.id
 
 },
+
 
 
 {
@@ -597,13 +1282,17 @@ updatedAt:new Date()
 },
 
 
+
 {
 
 new:true
 
 }
 
+
 );
+
+
 
 
 
@@ -645,9 +1334,16 @@ message:"Archive failed"
 
 
 
+
+
+
+
+
+
 // =================================
 // IMPORTANT CHAT
 // =================================
+
 
 const importantChat = async(req,res)=>{
 
@@ -657,6 +1353,7 @@ try{
 
 const chat = await Chat.findOneAndUpdate(
 
+
 {
 
 _id:req.params.id,
@@ -664,6 +1361,7 @@ _id:req.params.id,
 userId:req.user.id
 
 },
+
 
 
 {
@@ -675,13 +1373,17 @@ updatedAt:new Date()
 },
 
 
+
 {
 
 new:true
 
 }
 
+
 );
+
+
 
 
 
@@ -722,22 +1424,44 @@ message:"Important failed"
 
 
 
+
+
+
+
+// =================================
+// EXPORTS
+// =================================
+
+
 module.exports={
 
 
 chatController,
 
+
+editMessage,
+
+
+retryMessage,
+
+
 getUserChats,
+
 
 getSingleChat,
 
+
 deleteChat,
+
 
 renameChat,
 
+
 pinChat,
 
+
 archiveChat,
+
 
 importantChat
 

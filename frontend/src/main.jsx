@@ -11,6 +11,7 @@ import "./index.css";
 import "./styles/modal.css";
 
 import "./styles/light-theme.css";
+import "./styles/chat.css";
 
 
 // Main app styling

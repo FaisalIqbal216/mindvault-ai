@@ -11,12 +11,17 @@ useEffect
 } from "react";
 
 
+import {
+
+getProfile
+
+} from "../services/api";
+
+
 
 
 
 const AuthContext = createContext();
-
-
 
 
 
@@ -48,6 +53,9 @@ localStorage.getItem("user")
 
 
 
+
+
+
 // ===============================
 // THEME STATE
 // ===============================
@@ -58,6 +66,7 @@ const [theme,setTheme]=useState(
 localStorage.getItem("theme") || "dark"
 
 );
+
 
 
 
@@ -92,6 +101,86 @@ document.body.classList.add(theme);
 
 
 },[theme]);
+
+
+
+
+
+
+
+
+
+
+
+
+// ===============================
+// LOAD USER PROFILE
+// ===============================
+
+
+useEffect(()=>{
+
+
+const loadUserProfile = async()=>{
+
+
+const token = localStorage.getItem("token");
+
+
+if(!token)
+
+return;
+
+
+
+try{
+
+
+const profile = await getProfile();
+
+
+
+localStorage.setItem(
+
+"user",
+
+JSON.stringify(profile)
+
+);
+
+
+
+setUser(profile);
+
+
+
+}
+
+catch(error){
+
+
+console.log(
+
+"PROFILE LOAD ERROR",
+
+error
+
+);
+
+
+}
+
+
+
+};
+
+
+
+loadUserProfile();
+
+
+
+},[]);
 
 
 
@@ -138,7 +227,6 @@ setUser(data.user);
 
 
 };
-
 
 
 
@@ -198,7 +286,6 @@ setUser(newUser);
 
 
 
-
 // ===============================
 // CHANGE THEME
 // ===============================
@@ -222,6 +309,7 @@ setTheme(mode);
 
 
 };
+
 
 
 
@@ -307,6 +395,7 @@ changeTheme
 
 
 }}
+
 
 
 >
