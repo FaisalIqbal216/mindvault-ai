@@ -6,12 +6,17 @@ Route
 
 
 import Login from "./pages/Login";
+
 import Register from "./pages/Register";
 
 import ChatLayout from "./components/ChatLayout";
 
+import AdminLayout from "./admin/AdminLayout";
+
 
 import ProtectedRoute from "./routes/ProtectedRoute";
+
+import AdminRoute from "./routes/AdminRoute";
 
 
 import {
@@ -20,10 +25,14 @@ AuthProvider
 
 
 
+
+
 function App(){
 
 
+
 return(
+
 
 
 <AuthProvider>
@@ -59,6 +68,7 @@ element={<Register/>}
 
 
 
+
 <Route
 
 path="/chat"
@@ -78,6 +88,31 @@ element={
 
 
 
+
+
+
+<Route
+
+path="/admin"
+
+element={
+
+<AdminRoute>
+
+<AdminLayout/>
+
+</AdminRoute>
+
+}
+
+/>
+
+
+
+
+
+
+
 <Route
 
 path="*"
@@ -85,6 +120,7 @@ path="*"
 element={<Login/>}
 
 />
+
 
 
 
@@ -98,10 +134,11 @@ element={<Login/>}
 
 
 
-)
+);
 
 
 }
+
 
 
 export default App;

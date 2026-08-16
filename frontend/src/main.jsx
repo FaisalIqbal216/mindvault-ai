@@ -14,6 +14,10 @@ import "./styles/light-theme.css";
 import "./styles/chat.css";
 
 
+
+
+import "./styles/admin.css";
+
 // Main app styling
 import "./styles/app.css";
 

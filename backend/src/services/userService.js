@@ -44,7 +44,10 @@ name,
 
 email,
 
-password:hashedPassword
+password:hashedPassword,
+
+role:"user"
+
 
 });
 
@@ -54,6 +57,8 @@ return user;
 
 
 };
+
+
 
 
 
@@ -102,8 +107,20 @@ throw new Error(
 
 
 
-return user;
 
+// OLD USERS SAFETY
+
+if(!user.role){
+
+user.role="user";
+
+await user.save();
+
+}
+
+
+
+return user;
 
 
 };
@@ -112,10 +129,119 @@ return user;
 
 
 
+
+
+
+
+// =====================================
+// CHANGE PASSWORD
+// =====================================
+
+
+const changeUserPassword = async(
+
+userId,
+
+currentPassword,
+
+newPassword
+
+)=>{
+
+
+const user =
+await User.findById(userId);
+
+
+
+if(!user){
+
+
+throw new Error(
+"User not found"
+);
+
+
+}
+
+
+
+
+
+const isMatch =
+await bcrypt.compare(
+
+currentPassword,
+
+user.password
+
+);
+
+
+
+
+
+if(!isMatch){
+
+
+throw new Error(
+"Current password is incorrect"
+);
+
+
+}
+
+
+
+
+
+const hashedPassword =
+await bcrypt.hash(
+
+newPassword,
+
+12
+
+);
+
+
+
+
+
+user.password =
+hashedPassword;
+
+
+
+await user.save();
+
+
+
+
+
+return user;
+
+
+};
+
+
+
+
+
+
+
+
+
 module.exports={
+
 
 createUser,
 
-verifyUser
+
+verifyUser,
+
+
+changeUserPassword
+
 
 };

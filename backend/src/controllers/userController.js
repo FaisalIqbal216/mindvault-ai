@@ -1,12 +1,21 @@
 const User = require("../models/User");
 
+const {
+changeUserPassword
+}=require("../services/userService");
+
+
+
+
 
 
 
 
 // GET PROFILE
 
+
 const getProfile = async(req,res)=>{
+
 
 try{
 
@@ -17,11 +26,13 @@ const user = await User.findById(req.user.id)
 
 
 
+
 res.status(200).json(user);
 
 
 
 }
+
 
 catch(error){
 
@@ -53,12 +64,15 @@ message:"Unable to load profile"
 
 // UPDATE PROFILE
 
+
 const updateProfile = async(req,res)=>{
+
 
 try{
 
 
-const user = await User.findByIdAndUpdate(
+const user =
+await User.findByIdAndUpdate(
 
 req.user.id,
 
@@ -87,6 +101,7 @@ res.status(200).json(user);
 
 }
 
+
 catch(error){
 
 
@@ -103,6 +118,7 @@ message:"Profile update failed"
 }
 
 
+
 };
 
 
@@ -117,29 +133,31 @@ message:"Profile update failed"
 
 // GET SETTINGS
 
+
 const getSettings = async(req,res)=>{
 
 
 try{
 
 
-const user = await User.findById(
+const user =
+await User.findById(
 
 req.user.id
 
 )
-
 .select(
-
 "settings"
-
 );
+
 
 
 
 res.status(200).json(
 
-user.settings || {
+user.settings ||
+
+{
 
 darkMode:true,
 
@@ -156,10 +174,12 @@ autoTitle:true
 }
 
 
+
 catch(error){
 
 
 console.log(error);
+
 
 
 res.status(500).json({
@@ -170,6 +190,7 @@ message:"Unable to load settings"
 
 
 }
+
 
 
 };
@@ -186,13 +207,15 @@ message:"Unable to load settings"
 
 // UPDATE SETTINGS
 
+
 const updateSettings = async(req,res)=>{
 
 
 try{
 
 
-const user = await User.findByIdAndUpdate(
+const user =
+await User.findByIdAndUpdate(
 
 req.user.id,
 
@@ -211,10 +234,10 @@ new:true
 )
 
 .select(
-
 "settings"
-
 );
+
+
 
 
 
@@ -228,10 +251,13 @@ user.settings
 
 }
 
+
+
 catch(error){
 
 
 console.log(error);
+
 
 
 res.status(500).json({
@@ -254,16 +280,126 @@ message:"Settings update failed"
 
 
 
+
+
+
+// =====================================
+// CHANGE PASSWORD
+// =====================================
+
+
+const changePassword = async(req,res)=>{
+
+
+try{
+
+
+const {
+
+currentPassword,
+
+newPassword
+
+
+}=req.body;
+
+
+
+
+
+if(
+!currentPassword ||
+!newPassword
+){
+
+
+return res.status(400).json({
+
+message:"All password fields are required"
+
+});
+
+
+}
+
+
+
+
+
+
+
+await changeUserPassword(
+
+req.user.id,
+
+currentPassword,
+
+newPassword
+
+);
+
+
+
+
+
+
+
+res.status(200).json({
+
+message:"Password updated successfully"
+
+});
+
+
+
+}
+
+
+
+catch(error){
+
+
+console.log(error);
+
+
+
+res.status(400).json({
+
+message:error.message
+
+});
+
+
+}
+
+
+
+};
+
+
+
+
+
+
+
+
+
 module.exports={
 
 
 getProfile,
 
+
 updateProfile,
+
 
 getSettings,
 
-updateSettings
+
+updateSettings,
+
+
+changePassword
 
 
 };

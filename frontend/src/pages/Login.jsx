@@ -67,8 +67,16 @@ await loginUser(form);
 login(response);
 
 
+if(response.user.role==="admin"){
+
+navigate("/admin");
+
+}
+else{
 
 navigate("/chat");
+
+}
 
 
 }

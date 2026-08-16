@@ -45,6 +45,16 @@ required:true
 },
 
 
+role:{
+
+type:String,
+
+enum:["user","admin"],
+
+default:"user"
+
+},
+
 
 
 // NEW SETTINGS FIELD

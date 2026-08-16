@@ -46,7 +46,8 @@ require("./routes/userRoutes");
 
 
 
-
+const adminRoutes =
+require("./routes/adminRoutes");
 // Chat API
 
 app.use(
@@ -82,6 +83,14 @@ app.use(
 );
 
 
+
+app.use(
+
+"/api/admin",
+
+adminRoutes
+
+);
 
 // Server
 

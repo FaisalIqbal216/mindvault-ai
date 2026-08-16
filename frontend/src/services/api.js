@@ -52,6 +52,8 @@ return config;
 
 
 
+
+
 // ===============================
 // CHAT
 // TEXT + IMAGE + DOCUMENT SUPPORT
@@ -106,6 +108,8 @@ chatId
 
 
 
+
+
 if(file){
 
 
@@ -124,6 +128,8 @@ file
 
 
 
+
+
 const response = await API.post(
 
 "/chat",
@@ -134,7 +140,10 @@ formData
 
 
 
+
+
 return response.data;
+
 
 
 
@@ -160,6 +169,9 @@ throw error;
 
 
 };
+
+
+
 
 
 
@@ -251,6 +263,8 @@ return response.data;
 
 
 
+
+
 // ===============================
 // AUTH
 // ===============================
@@ -310,6 +324,7 @@ return response.data;
 
 
 
+
 // ===============================
 // USER PROFILE
 // ===============================
@@ -355,6 +370,7 @@ return response.data;
 
 
 };
+
 
 
 
