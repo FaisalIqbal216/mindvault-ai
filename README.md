@@ -1,369 +1,420 @@
-🤖 MindVault AI
+# 🤖 MindVault AI
 
-An intelligent AI knowledge assistant built with React.js, Node.js,
-Express.js, MongoDB Atlas, Groq LLM and RAG document intelligence.
+An intelligent AI knowledge assistant built with **React.js, Node.js, Express.js, MongoDB Atlas, Groq LLM, and RAG document intelligence**.
 
-Overview
+MindVault AI is a full-stack AI platform designed to provide ChatGPT-style conversations with personal knowledge management, document intelligence, and retrieval augmented generation capabilities.
 
-MindVault AI is a full-stack AI platform providing:
+---
 
-ChatGPT-style conversations
+# 📌 Overview
 
-Persistent chat memory
+MindVault AI provides:
 
-User authentication
+- ChatGPT-style conversations
+- Persistent chat memory
+- User authentication
+- Role-based access control
+- Admin dashboard
+- File uploads
+- Knowledge base management
+- Document processing
+- Retrieval Augmented Generation (RAG)
 
-Role based access
+---
 
-Admin dashboard
+# ✨ Features
 
-File uploads
-
-Knowledge base management
-
-Document processing
-
-Retrieval Augmented Generation (RAG)
-
-Features
-
-AI Chat System
+## 🤖 AI Chat System
 
 Implemented:
 
-Groq AI integration
+- Groq AI integration
+- AI assistant system prompt
+- Context-aware conversations
+- Persistent chat history
+- Attachment awareness
+- Intelligent document interaction
 
-AI assistant system prompt
+---
 
-Context aware conversations
+# 💬 Chat Management
 
-Persistent chat history
+Implemented:
 
-Attachment awareness
+- Create conversations
+- Continue previous chats
+- Edit messages
+- Retry AI responses
+- Rename chats
+- Pin chats
+- Archive chats
+- Delete chats
 
-Chat Management
+---
 
-Create conversations
+# 🔐 Authentication System
 
-Continue previous chats
+Implemented:
 
-Edit messages
+- User registration
+- User login
+- JWT authentication
+- Password hashing using bcrypt
+- Protected routes
+- Role-based authorization
 
-Retry AI responses
 
-Rename chats
+## User Roles
 
-Pin chats
-
-Archive chats
-
-Delete chats
-
-Authentication
-
-Registration
-
-Login
-
-JWT authentication
-
-bcrypt password hashing
-
-Protected routes
-
-Admin/user roles
-
-Roles:
-
+```
 user
 admin
+```
 
-Admin Dashboard
+---
 
-Implemented:
-
-Admin portal
-
-Dashboard overview
-
-User management
-
-Chat monitoring
-
-Profile management
-
-Password updates
-
-Theme preferences
-
-Knowledge Base System
+# 🛠️ Admin Dashboard
 
 Implemented:
 
-Admin document upload
+- Admin portal
+- Dashboard overview
+- User management
+- Chat monitoring
+- Profile management
+- Password updates
+- Theme preferences
 
-Document listing
+---
 
-Document view
+# 📁 Knowledge Base System
 
-Document update workflow
+Implemented:
 
-Document deletion
+- Admin document upload
+- Document listing
+- Document view
+- Document update workflow
+- Document deletion
+- PDF processing
+- DOC/DOCX processing
+- TXT processing
 
-PDF/DOCX/TXT processing
 
-Stored document information:
+## Stored Document Information
 
+```
 Title
 Filename
 File Type
 Mime Type
 Content
 Size
-Status
+Processing Status
 Embedding Status
 Uploader
+```
 
-RAG Pipeline
+---
 
-Workflow:
+# 🧠 RAG Pipeline
 
+## Workflow
+
+```
 Upload Document
-      |
+        |
+        |
 Text Extraction
-      |
+        |
+        |
 Chunk Creation
-      |
+        |
+        |
 Generate Embeddings
-      |
+        |
+        |
 Store Document Chunks
-      |
+        |
+        |
 User Question
-      |
+        |
+        |
 Semantic Retrieval
-      |
+        |
+        |
 Send Context To AI
-      |
+        |
+        |
 Generate Answer
+```
 
-Implemented:
+---
 
-Document model
+## Implemented Components
 
-DocumentChunk model
+- Document Model
+- DocumentChunk Model
+- Document extraction service
+- Chunking service
+- Embedding service
+- Vector storage foundation
+- Retrieval workflow
 
-Chunking service
+---
 
-Embedding service
+# 🗄️ Database Architecture
 
-Vector storage foundation
-
-Retrieval workflow
-
-Database Architecture
-
-Users
-
-Stores:
-
-User information
-
-Authentication data
-
-Roles
-
-Settings
-
-Chats
+## Users Collection
 
 Stores:
 
-User ID
+- User information
+- Authentication data
+- User roles
+- Settings
 
-Messages
 
-Attachments
+---
 
-Conversation data
-
-Chat status
-
-Documents
+## Chats Collection
 
 Stores:
 
-Uploaded files
+- User ID
+- Messages
+- Attachments
+- Conversation data
+- Chat status
 
-Extracted content
 
-Processing status
+---
 
-Embedding information
-
-DocumentChunks
+## Documents Collection
 
 Stores:
 
-Document reference
+- Uploaded files
+- Extracted content
+- Processing status
+- Embedding information
 
-Chunk content
 
-Chunk order
+---
 
-Metadata
+## DocumentChunks Collection
 
-Embedding vectors
+Stores:
 
-Technology Stack
+- Document reference
+- Chunk content
+- Chunk order
+- Metadata
+- Embedding vectors
 
-Frontend
+---
 
-React.js
+# 🚀 Technology Stack
 
-Vite
+## Frontend
 
-Axios
+| Technology | Purpose |
+|---|---|
+| React.js | User Interface |
+| Vite | Frontend Build Tool |
+| Axios | API Communication |
+| React Router | Routing |
+| CSS3 | Styling |
+| React Markdown | AI Response Formatting |
 
-React Router
+---
 
-CSS3
+## Backend
 
-React Markdown
+| Technology | Purpose |
+|---|---|
+| Node.js | Runtime Environment |
+| Express.js | Backend Framework |
+| MongoDB Atlas | Database |
+| Mongoose | Database Modeling |
+| JWT | Authentication |
+| bcrypt | Password Security |
+| Multer | File Upload Handling |
 
-Backend
+---
 
-Node.js
+## Artificial Intelligence
 
-Express.js
+| Technology | Purpose |
+|---|---|
+| Groq API | AI Response Generation |
+| LLM Models | Natural Language Processing |
+| HuggingFace | Text Embeddings |
 
-MongoDB Atlas
+---
 
-Mongoose
+# 📂 Project Structure
 
-JWT
-
-bcrypt
-
-Multer
-
-AI
-
-Groq API
-
-LLM integration
-
-HuggingFace embeddings
-
-Project Structure
-
+```
 MindVault-AI
 
 backend
- ├── controllers
- ├── middleware
- ├── models
- ├── routes
- ├── services
- └── server.js
+│
+├── controllers
+├── middleware
+├── models
+├── routes
+├── services
+└── server.js
+
 
 frontend
- └── src
-     ├── components
-     ├── pages
-     ├── admin
-     ├── services
-     └── styles
+│
+└── src
+    │
+    ├── components
+    ├── pages
+    ├── admin
+    ├── services
+    └── styles
+```
 
-Installation
+---
 
-Backend
+# ⚙️ Installation
 
+## Backend Setup
+
+```bash
 cd backend
+
 npm install
+```
 
-Environment:
+Create `.env` file:
 
+```env
 PORT=5000
+
 MONGO_URI=your_mongodb_connection
+
 JWT_SECRET=your_secret
+
 GROQ_API_KEY=your_groq_key
+
 HF_API_KEY=your_huggingface_key
+
 HF_EMBEDDING_MODEL=sentence-transformers/all-MiniLM-L6-v2
+```
 
-Run:
+Run backend:
 
+```bash
 node src/server.js
+```
 
-Frontend
+Backend will run:
 
+```
+http://localhost:5000
+```
+
+---
+
+# Frontend Setup
+
+```bash
 cd frontend
-npm install
-npm run dev
 
-Security
+npm install
+
+npm run dev
+```
+
+Frontend will run:
+
+```
+http://localhost:5173
+```
+
+---
+
+# 🔒 Security
 
 Never commit:
 
+```
 .env
 node_modules
 API keys
 Database credentials
 JWT secrets
+```
 
-Development Status
+---
 
-Phase 1 Completed
+# 📊 Development Status
 
-AI Chat
+## Phase 1 Completed
 
-Authentication
+✅ AI Chat System  
+✅ Authentication  
+✅ User System  
+✅ Chat Memory  
 
-User system
+---
 
-Chat memory
+## Phase 2 Completed
 
-Phase 2 Completed
+✅ Admin Dashboard  
+✅ User Management  
+✅ Chat Monitoring  
+✅ Admin Settings  
 
-Admin dashboard
+---
 
-User management
+## Phase 3 Completed / Active
 
-Chat monitoring
+✅ Knowledge Base  
+✅ Document Upload  
+✅ Document Processing  
+✅ Document Chunking  
+✅ Embedding Architecture  
+✅ RAG Pipeline Foundation  
 
-Admin settings
+---
 
-Phase 3 Completed / Active
+# 🔮 Future Roadmap
 
-Knowledge Base
+- Advanced vector database integration
+- Improved semantic search
+- Voice assistant
+- Image understanding
+- Cloud deployment
+- Mobile application
+- Enterprise knowledge assistant
 
-Document upload
+---
 
-Document processing
+# 🎯 Project Vision
 
-Document chunks
+MindVault AI aims to become a complete personal and organizational knowledge assistant where users can communicate with their own information using natural language.
 
-Embedding architecture
+Possible applications:
 
-RAG pipeline foundation
+- Personal AI Assistant
+- Company Knowledge Bot
+- Research Assistant
+- Document Intelligence Platform
 
-Roadmap
+---
 
-Advanced vector database
+# 👨‍💻 Author
 
-Better semantic search
+**Faisal Iqbal**
 
-Voice assistant
+---
 
-Image understanding
+# 🚀 Project Status
 
-Cloud deployment
-
-Mobile application
-
-Author
-
-Faisal Iqbal
-
-Status
-
-Active Development 🚀
+Active Development
