@@ -1,715 +1,369 @@
-# 🤖 MindVault AI
+🤖 MindVault AI
 
-An intelligent AI knowledge assistant built using **React.js, Node.js, Express.js, MongoDB Atlas, and Groq LLM**.
+An intelligent AI knowledge assistant built with React.js, Node.js,
+Express.js, MongoDB Atlas, Groq LLM and RAG document intelligence.
 
-MindVault AI provides a ChatGPT-like conversational experience with persistent conversation memory, user-based chat management, file upload support, role-based administration, and a scalable architecture designed for future **RAG (Retrieval Augmented Generation)** implementation.
+Overview
 
-The objective of this project is to build a complete AI knowledge platform where users can communicate with AI, maintain conversations, manage personal information, and eventually retrieve intelligent answers from their own uploaded knowledge sources.
+MindVault AI is a full-stack AI platform providing:
 
----
+ChatGPT-style conversations
 
-# 🚀 Project Overview
+Persistent chat memory
 
-MindVault AI is a full-stack AI application combining:
+User authentication
 
-- Conversational AI interface
-- Large Language Model integration
-- Persistent conversation memory
-- User authentication system
-- Role-based authorization
-- Chat management system
-- File upload foundation
-- Admin management platform
-- User profile management
-- Scalable backend architecture
-- Future document intelligence and RAG capabilities
+Role based access
 
----
+Admin dashboard
 
-# 🏗️ Application Architecture
+File uploads
 
-```
-User
- |
- |
-React Frontend
- |
- |
-Axios API Communication
- |
- |
-Express.js Backend
- |
- |
-Authentication Layer
- |
- |
-AI Service Layer
- |
- |
-Groq LLM (Llama 3.3)
- |
- |
-MongoDB Atlas
-(Database Storage)
-```
+Knowledge base management
 
----
+Document processing
 
-# ✨ Features
+Retrieval Augmented Generation (RAG)
 
-# 🤖 AI Chat System
+Features
+
+AI Chat System
 
 Implemented:
 
-✅ Groq AI integration  
-✅ Llama 3.3 model integration  
-✅ Real-time AI responses  
-✅ Context-aware conversations  
-✅ Persistent chat memory  
-✅ Professional AI assistant behavior  
+Groq AI integration
 
+AI assistant system prompt
 
-The AI service maintains previous conversation history and uses stored messages as context while generating responses.
+Context aware conversations
 
----
+Persistent chat history
 
-# 💬 Advanced Chat Management
+Attachment awareness
 
-Implemented:
+Chat Management
 
-✅ Create new conversations  
-✅ Continue previous conversations  
-✅ Store complete chat history  
-✅ Chat sidebar system  
-✅ Open previous conversations  
-✅ Multiple chat sessions  
+Create conversations
 
+Continue previous chats
 
-## Message Management
+Edit messages
 
-Implemented:
+Retry AI responses
 
-✅ Edit user messages  
-✅ Retry AI responses  
-✅ Regenerate AI answers  
+Rename chats
 
+Pin chats
 
-## Chat Organization
+Archive chats
 
-Implemented:
+Delete chats
 
-✅ Rename conversations  
-✅ Pin important chats  
-✅ Archive conversations  
-✅ Mark important conversations  
-✅ Delete conversations  
+Authentication
 
----
+Registration
 
-# 👤 User Management System
+Login
 
-Implemented:
+JWT authentication
 
-✅ User registration  
-✅ User login  
-✅ JWT authentication  
-✅ Protected routes  
-✅ User-based data separation  
-✅ Profile management  
-✅ User settings structure  
+bcrypt password hashing
 
+Protected routes
 
-Each user's conversations and personal information are stored independently.
+Admin/user roles
 
----
+Roles:
 
-# 🔐 Authentication & Authorization
-
-Implemented:
-
-✅ JWT token authentication  
-✅ Secure password hashing using bcrypt  
-✅ Protected frontend routes  
-✅ Protected backend APIs  
-✅ Role-based authorization  
-
-
-User Roles:
-
-```
 user
 admin
-```
 
-Admin users have additional access to the management dashboard.
-
----
-
-# 🛠️ Admin Dashboard System
+Admin Dashboard
 
 Implemented:
 
-## Admin Portal
+Admin portal
 
-Features:
+Dashboard overview
 
-✅ Admin authentication  
-✅ Professional admin layout  
-✅ Sidebar navigation  
-✅ Dashboard overview  
-✅ User management  
-✅ User chat monitoring  
-✅ Profile management  
-✅ Password update functionality  
-✅ Theme preferences  
+User management
 
+Chat monitoring
 
----
+Profile management
 
-# 📊 Admin Dashboard Analytics
+Password updates
 
-Dashboard provides:
+Theme preferences
 
-```
-Total Users
-Total Chats
-Total Documents
-```
-
----
-
-# 👥 User Management
-
-Admin can view:
-
-```
-Name
-Email
-Role
-Total Chats
-Account Creation Date
-```
-
-Admin can access:
-
-```
-User Chat List
-```
-
-Privacy maintained:
-
-✅ Admin can view chat titles and metadata  
-❌ Admin cannot access private conversation content
-
----
-
-# ⚙️ Admin Settings
+Knowledge Base System
 
 Implemented:
 
-✅ Update administrator profile  
-✅ Change administrator password  
-✅ Cancel unsaved changes  
-✅ Save profile updates  
-✅ Dark mode support  
-✅ Light mode support  
+Admin document upload
 
+Document listing
 
----
+Document view
 
-# 📁 File Upload System
+Document update workflow
 
-Implemented foundation for AI document interaction.
+Document deletion
 
-Supported:
+PDF/DOCX/TXT processing
 
-✅ Image upload  
-✅ Document upload foundation  
-✅ File metadata storage  
-✅ Attachment handling inside messages  
+Stored document information:
 
-
-Stored information:
-
-```
-File Name
+Title
+Filename
 File Type
 Mime Type
-File Size
-Upload Date
-```
+Content
+Size
+Status
+Embedding Status
+Uploader
 
-This system provides the foundation for future:
+RAG Pipeline
 
-- PDF processing
-- Document understanding
-- Knowledge base creation
-- RAG implementation
+Workflow:
 
----
+Upload Document
+      |
+Text Extraction
+      |
+Chunk Creation
+      |
+Generate Embeddings
+      |
+Store Document Chunks
+      |
+User Question
+      |
+Semantic Retrieval
+      |
+Send Context To AI
+      |
+Generate Answer
 
-# 🗄️ Database Architecture
+Implemented:
 
-Database:
+Document model
 
-**MongoDB Atlas**
+DocumentChunk model
 
----
+Chunking service
 
-# Users Collection
+Embedding service
 
-Stores:
+Vector storage foundation
 
-```
-User Information
-Authentication Data
-Profile Details
-User Settings
-Role Information
-```
+Retrieval workflow
 
-Example:
+Database Architecture
 
-```javascript
-{
-    name:"",
-    email:"",
-    password:"",
-    role:"user/admin"
-}
-```
-
----
-
-# Chats Collection
+Users
 
 Stores:
 
-```
+User information
+
+Authentication data
+
+Roles
+
+Settings
+
+Chats
+
+Stores:
+
 User ID
-Conversation Title
+
 Messages
+
 Attachments
-Created Date
-Updated Date
-Chat Status
-```
 
----
+Conversation data
 
-# Message Structure
+Chat status
 
-```javascript
-{
-    role:"user",
-    content:"message",
-    attachment:{
-        name:"",
-        type:"",
-        size:""
-    }
-}
-```
+Documents
 
----
+Stores:
 
-# 🛠️ Technology Stack
+Uploaded files
 
-## Frontend
+Extracted content
 
-| Technology | Purpose |
-|------------|---------|
-| React.js | User Interface |
-| Vite | Frontend Build Tool |
-| Axios | API Communication |
-| CSS3 | Responsive Styling |
-| React Markdown | AI Response Formatting |
-| Remark GFM | Markdown Support |
+Processing status
 
+Embedding information
 
----
+DocumentChunks
 
-## Backend
+Stores:
 
-| Technology | Purpose |
-|------------|---------|
-| Node.js | Backend Runtime |
-| Express.js | REST API Framework |
-| MongoDB Atlas | Database |
-| Mongoose | Database Modeling |
-| Multer | File Upload Handling |
-| JWT | Authentication |
-| bcrypt | Password Security |
+Document reference
 
+Chunk content
 
----
+Chunk order
 
-## Artificial Intelligence
+Metadata
 
-| Technology | Purpose |
-|------------|---------|
-| Groq API | AI Inference |
-| Llama 3.3 | Language Model |
+Embedding vectors
 
----
+Technology Stack
 
-# 📂 Project Structure
+Frontend
 
-```
-MindVault AI
+React.js
 
-│
-├── backend
-│
-│   ├── config
-│   ├── controllers
-│   ├── middleware
-│   ├── models
-│   ├── routes
-│   ├── services
-│   └── server.js
-│
-│
-├── frontend
-│
-│   ├── src
-│   │
-│   ├── components
-│   ├── admin
-│   ├── pages
-│   ├── services
-│   ├── styles
-│   └── App.jsx
-│
-│
-└── README.md
-```
+Vite
 
----
+Axios
 
-# ⚙️ Installation Guide
+React Router
 
-## Clone Repository
+CSS3
 
-```bash
-git clone https://github.com/yourusername/mindvault-ai.git
-```
+React Markdown
 
-Navigate:
+Backend
 
-```bash
-cd mindvault-ai
-```
+Node.js
 
----
+Express.js
 
-# Backend Setup
+MongoDB Atlas
 
-Navigate:
+Mongoose
 
-```bash
+JWT
+
+bcrypt
+
+Multer
+
+AI
+
+Groq API
+
+LLM integration
+
+HuggingFace embeddings
+
+Project Structure
+
+MindVault-AI
+
+backend
+ ├── controllers
+ ├── middleware
+ ├── models
+ ├── routes
+ ├── services
+ └── server.js
+
+frontend
+ └── src
+     ├── components
+     ├── pages
+     ├── admin
+     ├── services
+     └── styles
+
+Installation
+
+Backend
+
 cd backend
-```
-
-Install dependencies:
-
-```bash
 npm install
-```
 
-Create `.env` file:
+Environment:
 
-```env
 PORT=5000
-
-MONGO_URI=your_mongodb_connection_string
-
-GROQ_API_KEY=your_groq_api_key
-
-JWT_SECRET=your_secret_key
-```
-
-Start backend:
-
-```bash
-node server.js
-```
-
-Backend runs on:
-
-```
-http://localhost:5000
-```
-
----
-
-# Frontend Setup
-
-Open another terminal:
-
-```bash
-cd frontend
-```
-
-Install:
-
-```bash
-npm install
-```
+MONGO_URI=your_mongodb_connection
+JWT_SECRET=your_secret
+GROQ_API_KEY=your_groq_key
+HF_API_KEY=your_huggingface_key
+HF_EMBEDDING_MODEL=sentence-transformers/all-MiniLM-L6-v2
 
 Run:
 
-```bash
+node src/server.js
+
+Frontend
+
+cd frontend
+npm install
 npm run dev
-```
 
-Frontend runs on:
+Security
 
-```
-http://localhost:5173
-```
+Never commit:
 
----
-
-# 🔐 Security
-
-Sensitive information should never be uploaded to GitHub.
-
-Private files:
-
-```
 .env
 node_modules
-uploads
-```
+API keys
+Database credentials
+JWT secrets
 
-Protected information:
+Development Status
 
-✅ API Keys  
-✅ Database credentials  
-✅ JWT secrets  
-✅ Authentication information  
+Phase 1 Completed
 
----
+AI Chat
 
-# 🧠 Application Workflow
+Authentication
 
-```
-User Message
+User system
 
-      |
+Chat memory
 
-React Chat Interface
+Phase 2 Completed
 
-      |
+Admin dashboard
 
-Axios API Request
+User management
 
-      |
+Chat monitoring
 
-Express Controller
+Admin settings
 
-      |
+Phase 3 Completed / Active
 
-Authentication Layer
+Knowledge Base
 
-      |
+Document upload
 
-Chat Memory Service
+Document processing
 
-      |
+Document chunks
 
-AI Service
+Embedding architecture
 
-      |
+RAG pipeline foundation
 
-Groq LLM
+Roadmap
 
-      |
+Advanced vector database
 
-AI Response
+Better semantic search
 
-      |
+Voice assistant
 
-MongoDB Storage
-```
+Image understanding
 
----
+Cloud deployment
 
-# 🔮 Future Roadmap
+Mobile application
 
-# Phase 3 — Document Intelligence & RAG System
+Author
 
-Upcoming:
+Faisal Iqbal
 
-## Admin Knowledge Base
-
-Planned:
-
-✅ Admin document upload
-
-✅ Document management panel
-
-✅ PDF/DOCX processing
-
-✅ Knowledge source management
-
-
----
-
-# 📚 RAG (Retrieval Augmented Generation)
-
-Future workflow:
-
-```
-Admin Uploads Document
-
-        |
-
-Text Extraction
-
-        |
-
-Document Chunking
-
-        |
-
-Generate Embeddings
-
-        |
-
-Store Vectors
-
-        |
-
-User Question
-
-        |
-
-Semantic Search
-
-        |
-
-Retrieve Relevant Knowledge
-
-        |
-
-Send Context To AI Model
-
-        |
-
-Generate Accurate Answer
-```
-
----
-
-# 🎓 Future Applications
-
-MindVault AI can become:
-
-- University Information Assistant
-- Company Internal Knowledge Assistant
-- Personal Document Assistant
-- Research Assistant
-- Enterprise Knowledge Platform
-
-
-Example:
-
-Admin uploads:
-
-```
-Foundation University Prospectus
-```
-
-Student asks:
-
-```
-What are the admission requirements for BS Computer Science?
-```
-
-AI retrieves information from the uploaded document and provides an accurate answer.
-
----
-
-# 🚀 Additional Future Features
-
-Planned:
-
-✅ Advanced Document Management
-
-✅ Vector Database Integration
-
-✅ PDF Knowledge Base
-
-✅ Image Understanding
-
-✅ Voice Assistant
-
-✅ Advanced Analytics
-
-✅ Cloud Deployment
-
-✅ Mobile Application
-
----
-
-# 📌 Current Development Status
-
-## Phase 1 Completed
-
-✅ AI Chat System  
-✅ Groq LLM Integration  
-✅ MongoDB Memory System  
-✅ Chat History  
-✅ Sidebar Management  
-✅ Message Editing  
-✅ AI Retry System  
-✅ User Authentication  
-✅ User Profile System  
-✅ File Upload Foundation  
-
-
----
-
-## Phase 2 Completed
-
-✅ Admin Authentication  
-✅ Role Based Access Control  
-✅ Admin Dashboard  
-✅ User Management  
-✅ User Chat Monitoring  
-✅ Admin Settings  
-✅ Password Management  
-✅ Theme Preferences  
-
-
----
-
-# 🎯 Project Vision
-
-The long-term goal is to transform MindVault AI into a complete AI knowledge platform where users and organizations can communicate with their own information using natural language.
-
-Potential implementations:
-
-- University AI Assistant
-- Company Internal Knowledge Bot
-- Personal Research Assistant
-- Document Intelligence Platform
-
----
-
-# 👨‍💻 Author
-
-## Faisal Iqbal
-
-Full-stack AI application development project.
-
----
-
-# ⭐ Project Status
+Status
 
 Active Development 🚀
-
-Building toward a complete RAG-powered MindVault-AI.
