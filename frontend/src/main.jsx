@@ -18,6 +18,10 @@ import "./styles/chat.css";
 
 import "./styles/admin.css";
 
+
+
+import "./styles/document.css";
+
 // Main app styling
 import "./styles/app.css";
 

@@ -1,136 +1,314 @@
-const mongoose = require("mongoose");
+const mongoose =
+    require("mongoose");
 
 
-const documentSchema = new mongoose.Schema(
+// =====================================
+// DOCUMENT MODEL
+// KNOWLEDGE BASE / RAG STORAGE
+// =====================================
 
+const documentSchema =
+    new mongoose.Schema(
 
-{
+        {
 
-name:{
+            // =================================
+            // DISPLAY INFORMATION
+            // =================================
 
+            title: {
 
-type:String,
+                type: String,
 
-required:true,
+                required: true,
 
-trim:true
+                trim: true
+            },
 
 
-},
+            name: {
 
+                type: String,
 
+                required: true,
 
-originalName:{
+                trim: true
+            },
 
 
-type:String,
+            originalName: {
 
-default:null
+                type: String,
 
+                default: null,
 
-},
+                trim: true
+            },
 
 
+            // =================================
+            // FILE INFORMATION
+            // =================================
 
-fileType:{
+            fileType: {
 
+                type: String,
 
-type:String,
+                default: null,
 
-default:null
+                trim: true
+            },
 
 
-},
+            mimeType: {
 
+                type: String,
 
+                default: null,
 
-mimeType:{
+                trim: true
+            },
 
 
-type:String,
+            filePath: {
 
-default:null
+                type: String,
 
+                default: null,
 
-},
+                trim: true
+            },
 
 
+            size: {
 
-filePath:{
+                type: Number,
 
+                default: 0,
 
-type:String,
+                min: 0
+            },
 
-default:null
 
+            // =================================
+            // FULL EXTRACTED CONTENT
+            // =================================
 
-},
+            /*
+             * Permanent source content.
+             *
+             * This is what the admin will read/edit
+             * from the Document Reader.
+             *
+             * Chunks are derived from this content.
+             */
 
+            content: {
 
+                type: String,
 
-size:{
+                default: ""
+            },
 
 
-type:Number,
+            // =================================
+            // PROCESSING
+            // =================================
 
-default:0
+            status: {
 
+                type: String,
 
-},
+                enum: [
 
+                    "processing",
 
+                    "completed",
 
-uploadedBy:{
+                    "failed"
 
+                ],
 
-type:mongoose.Schema.Types.ObjectId,
+                default: "processing",
 
-ref:"User",
+                index: true
+            },
 
-default:null
 
+            processingError: {
 
-},
+                type: String,
 
+                default: null
+            },
 
 
-status:{
+            // =================================
+            // DOCUMENT STATISTICS
+            // =================================
 
+            characterCount: {
 
-type:String,
+                type: Number,
 
-enum:[
-"processing",
-"completed",
-"failed"
-],
+                default: 0,
 
-default:"processing"
+                min: 0
+            },
 
 
-}
+            wordCount: {
 
+                type: Number,
 
+                default: 0,
 
-},
+                min: 0
+            },
 
 
-{
+            chunks: {
 
+                type: Number,
 
-timestamps:true
+                default: 0,
 
+                min: 0
+            },
 
-}
 
+            pageCount: {
 
+                type: Number,
 
-);
+                default: null,
 
+                min: 0
+            },
+
+
+            // =================================
+            // UPLOADED BY
+            // =================================
+
+            uploadedBy: {
+
+                type:
+                    mongoose.Schema.Types.ObjectId,
+
+                ref: "User",
+
+                required: true,
+
+                index: true
+            },
+
+
+            // =================================
+            // EMBEDDING INFORMATION
+            // =================================
+
+            embeddingStatus: {
+
+                type: String,
+
+                enum: [
+
+                    "pending",
+
+                    "processing",
+
+                    "completed",
+
+                    "failed"
+
+                ],
+
+                default: "pending",
+
+                index: true
+            },
+
+
+            embeddingModel: {
+
+                type: String,
+
+                default: null,
+
+                trim: true
+            },
+
+
+            embeddingDimensions: {
+
+                type: Number,
+
+                default: 0,
+
+                min: 0
+            },
+
+
+            embeddingError: {
+
+                type: String,
+
+                default: null
+            },
+
+
+            // =================================
+            // FUTURE VECTOR DATABASE IDS
+            // =================================
+
+            vectorIds: {
+
+                type: [String],
+
+                default: []
+            }
+
+        },
+
+        {
+
+            timestamps: true
+        }
+    );
+
+
+// =====================================
+// INDEXES
+// =====================================
+
+documentSchema.index({
+
+    uploadedBy: 1,
+
+    createdAt: -1
+
+});
+
+
+documentSchema.index({
+
+    status: 1,
+
+    embeddingStatus: 1
+
+});
+
+
+documentSchema.index({
+
+    originalName: 1
+
+});
 
 
 module.exports =
-mongoose.model(
-"Document",
-documentSchema
-);
+    mongoose.model(
+        "Document",
+        documentSchema
+    );

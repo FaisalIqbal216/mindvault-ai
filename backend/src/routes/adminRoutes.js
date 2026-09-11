@@ -1,6 +1,5 @@
 const express = require("express");
 
-
 const router = express.Router();
 
 
@@ -31,6 +30,14 @@ getUserChats
 
 
 }=require("../controllers/adminController");
+
+
+
+
+
+const documentRoutes =
+require("./documentRoutes");
+
 
 
 
@@ -99,7 +106,7 @@ getAdminStats
 
 
 // =====================================
-// USERS LIST WITH CHAT COUNT
+// USERS LIST
 // =====================================
 
 
@@ -129,7 +136,7 @@ getAdminUsers
 
 
 // =====================================
-// SINGLE USER CHAT TITLES
+// USER CHAT TITLES
 // =====================================
 
 
@@ -146,6 +153,30 @@ roleMiddleware("admin"),
 
 
 getUserChats
+
+
+);
+
+
+
+
+
+
+
+
+
+// =====================================
+// DOCUMENT MANAGEMENT
+// =====================================
+
+
+router.use(
+
+
+"/documents",
+
+
+documentRoutes
 
 
 );

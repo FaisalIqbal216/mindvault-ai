@@ -1,7 +1,11 @@
 const {
+
 createChat,
+
 addMessage,
+
 getAIHistory
+
 } = require("../services/chatMemory");
 
 
@@ -12,6 +16,218 @@ const Chat = require("../models/Chat");
 
 
 const getAIResponse = require("../services/aiService");
+
+
+
+// =====================================
+// RAG / KNOWLEDGE BASE
+// =====================================
+
+const {
+
+searchRelevantChunks,
+
+buildKnowledgeContext
+
+} = require("../services/vectorSearchService");
+
+
+
+// =====================================
+// ADD KNOWLEDGE CONTEXT
+// =====================================
+// This function is intentionally isolated
+// so existing chat/file workflow remains
+// unchanged if RAG has an error.
+// =====================================
+
+const addKnowledgeContext = async(
+
+history,
+
+question
+
+)=>{
+
+
+try{
+
+
+if(
+
+!question ||
+
+!question.trim()
+
+){
+
+
+return history;
+
+
+}
+
+
+
+
+
+const relevantChunks =
+
+await searchRelevantChunks(
+
+question,
+
+{
+
+limit:5,
+
+threshold:0.30
+
+}
+
+);
+
+
+
+
+
+if(
+
+!relevantChunks ||
+
+!relevantChunks.length
+
+){
+
+
+return history;
+
+
+}
+
+
+
+
+
+
+const knowledgeContext =
+
+buildKnowledgeContext(
+
+relevantChunks
+
+);
+
+
+
+
+
+if(
+
+!knowledgeContext
+
+){
+
+
+return history;
+
+
+}
+
+
+
+
+
+history.push({
+
+
+role:"system",
+
+
+content:`
+
+
+KNOWLEDGE BASE CONTEXT
+
+
+
+The following information was retrieved from documents uploaded to the MindVault AI knowledge base.
+
+
+
+Use this information when it is relevant to the user's question.
+
+
+
+IMPORTANT KNOWLEDGE RULES:
+
+
+
+- Prefer information from the knowledge base when the question is about the uploaded documents.
+
+- Do not invent information that is not supported by the retrieved documents.
+
+- If the documents do not contain enough information, clearly tell the user.
+
+- Mention the source document name when useful.
+
+- Do not expose similarity scores, embeddings, vector IDs, or internal retrieval information.
+
+- Do not claim that information came from a document if it was not present in the retrieved context.
+
+
+
+Retrieved Knowledge:
+
+
+
+${knowledgeContext}
+
+
+
+`
+
+
+});
+
+
+
+}
+
+
+
+catch(error){
+
+
+
+// RAG failure must NEVER break
+
+// the normal chatbot.
+
+
+
+console.log(
+
+"RAG CONTEXT ERROR:",
+
+error.message
+
+);
+
+
+
+}
+
+
+
+return history;
+
+
+
+};
+
+
+
 
 
 
@@ -70,7 +286,9 @@ currentChatId = await createChat(userId);
 
 
 // ===============================
+
 // PROCESS ATTACHMENT
+
 // ===============================
 
 
@@ -123,16 +341,19 @@ User uploaded a file.
 
 
 File Name:
+
 ${processedFile.name}
 
 
 
 File Type:
+
 ${processedFile.type}
 
 
 
 Mime Type:
+
 ${processedFile.mimeType}
 
 
@@ -160,7 +381,9 @@ ${processedFile.content}
 
 
 // ===============================
+
 // SAVE USER MESSAGE
+
 // ===============================
 
 
@@ -187,7 +410,9 @@ attachment
 
 
 // ===============================
+
 // GET CHAT HISTORY
+
 // ===============================
 
 
@@ -206,7 +431,9 @@ currentChatId
 
 
 // ===============================
+
 // ADD FILE CONTEXT FOR AI
+
 // ===============================
 
 
@@ -238,7 +465,34 @@ content:fileContext
 
 
 // ===============================
+// KNOWLEDGE BASE / RAG
+// ===============================
+// Existing attachment workflow stays
+// exactly above.
+// RAG is added after chat history
+// and before Groq response.
+
+
+await addKnowledgeContext(
+
+history,
+
+message
+
+);
+
+
+
+
+
+
+
+
+
+// ===============================
+
 // GENERATE AI RESPONSE
+
 // ===============================
 
 
@@ -252,7 +506,9 @@ const answer = await getAIResponse(history);
 
 
 // ===============================
+
 // SAVE AI RESPONSE
+
 // ===============================
 
 
@@ -329,7 +585,9 @@ message:"Chat failed"
 
 
 // =================================
+
 // EDIT MESSAGE
+
 // =================================
 
 
@@ -497,6 +755,24 @@ const history = await getAIHistory(chatId);
 
 
 
+
+// ===============================
+// RAG FOR EDITED QUESTION
+// ===============================
+
+
+await addKnowledgeContext(
+
+history,
+
+content
+
+);
+
+
+
+
+
 const answer = await getAIResponse(history);
 
 
@@ -584,7 +860,9 @@ message:"Edit failed"
 
 
 // =================================
+
 // RETRY AI MESSAGE
+
 // =================================
 
 
@@ -713,6 +991,70 @@ const history = await getAIHistory(chatId);
 
 
 
+// ===============================
+// FIND LAST USER QUESTION
+// ===============================
+
+
+let lastUserQuestion = "";
+
+
+
+for(
+
+let i=history.length-1;
+
+i>=0;
+
+i--
+
+){
+
+
+
+if(
+
+history[i].role==="user"
+
+){
+
+
+lastUserQuestion =
+
+history[i].content || "";
+
+
+break;
+
+
+}
+
+
+
+}
+
+
+
+
+
+
+// ===============================
+// RAG FOR RETRY
+// ===============================
+
+
+await addKnowledgeContext(
+
+history,
+
+lastUserQuestion
+
+);
+
+
+
+
+
 
 const answer = await getAIResponse(history);
 
@@ -796,7 +1138,9 @@ message:"Retry failed"
 
 
 // =================================
+
 // GET ALL USER CHATS
+
 // =================================
 
 
@@ -877,6 +1221,8 @@ console.log(
 
 error
 
+
+
 );
 
 
@@ -908,7 +1254,9 @@ message:"Unable to load chats"
 
 
 // =================================
+
 // GET SINGLE CHAT
+
 // =================================
 
 
@@ -988,7 +1336,9 @@ message:"Unable to load chat"
 
 
 // =================================
+
 // DELETE CHAT
+
 // =================================
 
 
@@ -1073,7 +1423,9 @@ message:"Delete failed"
 
 
 // =================================
+
 // RENAME CHAT
+
 // =================================
 
 
@@ -1162,7 +1514,9 @@ message:"Rename failed"
 
 
 // =================================
+
 // PIN CHAT
+
 // =================================
 
 
@@ -1250,7 +1604,9 @@ message:"Pin failed"
 
 
 // =================================
+
 // ARCHIVE CHAT
+
 // =================================
 
 
@@ -1341,7 +1697,9 @@ message:"Archive failed"
 
 
 // =================================
+
 // IMPORTANT CHAT
+
 // =================================
 
 
@@ -1429,7 +1787,9 @@ message:"Important failed"
 
 
 // =================================
+
 // EXPORTS
+
 // =================================
 
 

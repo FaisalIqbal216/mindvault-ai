@@ -1,0 +1,1547 @@
+/* =====================================================
+   AI KNOWLEDGE BASE DOCUMENT MANAGEMENT
+   FINAL PROFESSIONAL UI
+   LIGHT + DARK MODE
+===================================================== */
+
+
+/* ===============================
+   ROOT VARIABLES
+================================ */
+
+:root {
+
+    --doc-bg:#f5f7fb;
+
+    --doc-card:#ffffff;
+
+    --doc-text:#111827;
+
+    --doc-muted:#64748b;
+
+    --doc-border:#e2e8f0;
+
+    --doc-primary:#2563eb;
+
+    --doc-primary-hover:#1d4ed8;
+
+    --doc-success:#16a34a;
+
+    --doc-danger:#dc2626;
+
+    --doc-warning:#d97706;
+
+    --doc-shadow:
+    0 15px 40px rgba(15,23,42,.08);
+
+    --doc-radius:22px;
+
+}
+
+
+
+/* ===============================
+   DARK MODE
+================================ */
+
+
+.dark {
+
+    --doc-bg:#020617;
+
+    --doc-card:#111827;
+
+    --doc-text:#f8fafc;
+
+    --doc-muted:#94a3b8;
+
+    --doc-border:#334155;
+
+    --doc-shadow:
+    0 15px 50px rgba(0,0,0,.45);
+
+}
+
+
+
+/* ===============================
+   MAIN PAGE
+================================ */
+
+
+.admin-documents-page {
+
+    background:var(--doc-bg);
+
+    color:var(--doc-text);
+
+    min-height:100%;
+
+    padding:35px;
+
+}
+
+
+
+/* ===============================
+   HEADER
+================================ */
+
+
+.document-page-header {
+
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:35px;
+
+}
+
+
+
+.document-page-header h1 {
+
+
+    font-size:34px;
+
+    margin:0;
+
+    font-weight:800;
+
+    letter-spacing:-.5px;
+
+}
+
+
+
+.document-page-header p {
+
+
+    margin-top:8px;
+
+    color:var(--doc-muted);
+
+    font-size:16px;
+
+}
+
+
+
+.document-count {
+
+
+    background:var(--doc-card);
+
+    border:1px solid var(--doc-border);
+
+    padding:15px 25px;
+
+    border-radius:16px;
+
+    font-weight:700;
+
+}
+
+
+
+/* ===============================
+   TOAST
+================================ */
+
+
+.document-toast {
+
+
+    position:fixed;
+
+    right:30px;
+
+    top:100px;
+
+    z-index:99999;
+
+    padding:15px 25px;
+
+    border-radius:14px;
+
+    font-weight:700;
+
+    box-shadow:var(--doc-shadow);
+
+}
+
+
+
+.document-toast.success {
+
+
+    background:#dcfce7;
+
+    color:#166534;
+
+}
+
+
+
+.document-toast.error {
+
+
+    background:#fee2e2;
+
+    color:#991b1b;
+
+}
+
+
+
+/* ===============================
+   UPLOAD CARD
+================================ */
+
+
+.document-upload-card {
+
+
+    background:var(--doc-card);
+
+    border:1px solid var(--doc-border);
+
+    padding:30px;
+
+    border-radius:var(--doc-radius);
+
+    box-shadow:var(--doc-shadow);
+
+    margin-bottom:40px;
+
+}
+
+
+
+
+
+.document-upload-dropzone {
+
+
+    border:2px dashed #cbd5e1;
+
+    border-radius:20px;
+
+    min-height:260px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+
+
+.document-upload-dropzone:hover {
+
+
+    border-color:var(--doc-primary);
+
+    background:
+    rgba(37,99,235,.05);
+
+}
+
+
+
+.document-upload-dropzone.drag-active {
+
+
+    border-color:#2563eb;
+
+    background:#eff6ff;
+
+}
+
+
+
+.upload-icon {
+
+
+    width:75px;
+
+    height:75px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:#eff6ff;
+
+    color:#2563eb;
+
+    font-size:40px;
+
+    font-weight:800;
+
+    margin-bottom:20px;
+
+}
+
+
+
+.document-upload-dropzone h3 {
+
+
+    font-size:24px;
+
+    margin:5px;
+
+}
+
+
+
+.document-upload-dropzone p {
+
+
+    color:var(--doc-muted);
+
+}
+
+
+
+/* SELECTED FILE */
+
+
+.selected-document {
+
+
+    margin-top:20px;
+
+    padding:15px 20px;
+
+    background:#f1f5f9;
+
+    border-radius:14px;
+
+    display:flex;
+
+    gap:20px;
+
+    align-items:center;
+
+}
+
+
+
+.dark .selected-document {
+
+
+    background:#1e293b;
+
+}
+
+
+
+.selected-document button {
+
+
+    border:none;
+
+    background:#fee2e2;
+
+    color:#dc2626;
+
+    padding:8px 15px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+}
+
+
+
+
+
+.document-upload-button {
+
+
+    width:100%;
+
+    margin-top:25px;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:var(--doc-primary);
+
+    color:white;
+
+    font-size:16px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+
+
+.document-upload-button:hover {
+
+
+    background:var(--doc-primary-hover);
+
+    transform:translateY(-2px);
+
+}
+
+
+
+.document-upload-button:disabled {
+
+
+    opacity:.5;
+
+    cursor:not-allowed;
+
+}
+
+
+
+.document-upload-card small {
+
+
+    display:block;
+
+    margin-top:15px;
+
+    color:var(--doc-muted);
+
+}
+
+
+
+/* ===============================
+   GRID
+================================ */
+
+
+.documents-grid {
+
+
+    display:grid;
+
+    grid-template-columns:
+
+    repeat(auto-fill,minmax(360px,1fr));
+
+
+    gap:30px;
+
+}
+
+
+
+/* ===============================
+   CARD
+================================ */
+
+
+.document-card {
+
+
+    background:var(--doc-card);
+
+    border:1px solid var(--doc-border);
+
+    border-radius:22px;
+
+    padding:25px;
+
+    box-shadow:var(--doc-shadow);
+
+    transition:.3s;
+
+}
+
+
+
+.document-card:hover {
+
+
+    transform:translateY(-6px);
+
+}
+
+
+
+
+
+.document-card-header {
+
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+
+
+/* FILE ICON */
+
+
+.file-icon {
+
+
+    width:60px;
+
+    height:60px;
+
+    border-radius:16px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-weight:900;
+
+    background:#dbeafe;
+
+    color:#2563eb;
+
+}
+
+
+
+.file-icon.pdf {
+
+
+    background:#fee2e2;
+
+    color:#dc2626;
+
+}
+
+
+
+.file-icon.txt {
+
+
+    background:#dcfce7;
+
+    color:#16a34a;
+
+}
+
+
+
+
+.document-status {
+
+
+    padding:7px 15px;
+
+    border-radius:30px;
+
+    font-size:12px;
+
+    font-weight:700;
+
+}
+
+
+
+.status-success {
+
+
+    background:#dcfce7;
+
+    color:#166534;
+
+}
+
+
+
+.status-error {
+
+
+    background:#fee2e2;
+
+    color:#991b1b;
+
+}
+
+
+
+.status-loading {
+
+
+    background:#fef3c7;
+
+    color:#92400e;
+
+}
+
+
+/* ===============================
+   CARD BODY
+================================ */
+
+
+.document-card-body {
+
+
+    margin-top:25px;
+
+}
+
+
+
+.document-title {
+
+
+    font-size:20px;
+
+    font-weight:800;
+
+    margin:0 0 20px;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+    white-space:nowrap;
+
+}
+
+
+
+.document-meta {
+
+
+    display:grid;
+
+    grid-template-columns:
+
+    repeat(3,1fr);
+
+    gap:15px;
+
+    margin-bottom:20px;
+
+}
+
+
+
+.document-meta div {
+
+
+    background:#f8fafc;
+
+    padding:12px;
+
+    border-radius:14px;
+
+}
+
+
+
+.dark .document-meta div {
+
+
+    background:#1e293b;
+
+}
+
+
+
+.document-meta small {
+
+
+    display:block;
+
+    color:var(--doc-muted);
+
+    font-size:12px;
+
+    margin-bottom:5px;
+
+}
+
+
+
+.document-meta strong {
+
+
+    font-size:14px;
+
+}
+
+
+
+
+
+/* ===============================
+   RAG BOX
+================================ */
+
+
+.document-rag-box {
+
+
+    display:grid;
+
+    grid-template-columns:
+
+    1fr 1fr;
+
+    gap:15px;
+
+    background:#f8fafc;
+
+    padding:18px;
+
+    border-radius:18px;
+
+    margin-bottom:25px;
+
+}
+
+
+
+.dark .document-rag-box {
+
+
+    background:#1e293b;
+
+}
+
+
+
+.document-rag-box div {
+
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+
+
+.document-rag-box span {
+
+
+    color:var(--doc-muted);
+
+    font-size:13px;
+
+}
+
+
+
+.document-rag-box strong {
+
+
+    margin-top:5px;
+
+    font-size:15px;
+
+}
+
+
+
+.embedding-success {
+
+
+    color:#16a34a;
+
+}
+
+
+
+.embedding-pending {
+
+
+    color:#d97706;
+
+}
+
+
+
+
+
+/* ===============================
+   BUTTONS
+================================ */
+
+
+.document-card-actions {
+
+
+    display:flex;
+
+    gap:12px;
+
+}
+
+
+
+.document-btn {
+
+
+    flex:1;
+
+    padding:12px;
+
+    border:none;
+
+    border-radius:12px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+
+
+.document-btn:hover {
+
+
+    transform:translateY(-2px);
+
+}
+
+
+
+.view-btn {
+
+
+    background:#dbeafe;
+
+    color:#1d4ed8;
+
+}
+
+
+
+.view-btn:hover {
+
+
+    background:#bfdbfe;
+
+}
+
+
+
+.edit-btn {
+
+
+    background:#1e293b;
+
+    color:white;
+
+}
+
+
+
+.edit-btn:hover {
+
+
+    background:#020617;
+
+}
+
+
+
+.delete-btn {
+
+
+    background:#fee2e2;
+
+    color:#dc2626;
+
+}
+
+
+
+.delete-btn:hover {
+
+
+    background:#fecaca;
+
+}
+
+
+
+.document-btn:disabled {
+
+
+    opacity:.5;
+
+    cursor:not-allowed;
+
+}
+
+
+
+
+
+/* ===============================
+   MODAL
+================================ */
+
+
+.document-modal-overlay {
+
+
+    position:fixed;
+
+    inset:0;
+
+    background:
+
+    rgba(15,23,42,.65);
+
+    backdrop-filter:blur(5px);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    z-index:9999;
+
+    padding:20px;
+
+}
+
+
+
+
+
+.document-modal {
+
+
+    width:90%;
+
+    max-width:1000px;
+
+    max-height:90vh;
+
+    overflow:auto;
+
+    background:var(--doc-card);
+
+    color:var(--doc-text);
+
+    border-radius:25px;
+
+    padding:35px;
+
+    box-shadow:
+
+    0 30px 80px rgba(0,0,0,.35);
+
+    animation:
+
+    modalShow .25s ease;
+
+}
+
+
+
+.document-modal.large {
+
+
+    max-width:1100px;
+
+}
+
+
+
+@keyframes modalShow {
+
+
+    from{
+
+        opacity:0;
+
+        transform:scale(.92);
+
+    }
+
+
+    to{
+
+        opacity:1;
+
+        transform:scale(1);
+
+    }
+
+
+}
+
+
+
+
+
+.modal-close {
+
+
+    position:absolute;
+
+    right:25px;
+
+    top:20px;
+
+    width:40px;
+
+    height:40px;
+
+    border-radius:50%;
+
+    border:none;
+
+    background:#fee2e2;
+
+    color:#dc2626;
+
+    font-size:25px;
+
+    cursor:pointer;
+
+}
+
+
+
+
+
+/* ===============================
+   MODAL HEADER
+================================ */
+
+
+.modal-header {
+
+
+    margin-bottom:25px;
+
+}
+
+
+
+.modal-header h2 {
+
+
+    margin:0;
+
+    font-size:28px;
+
+}
+
+
+
+.modal-header p {
+
+
+    color:var(--doc-muted);
+
+}
+
+
+
+
+
+/* ===============================
+   DOCUMENT DETAILS
+================================ */
+
+
+.document-detail-header {
+
+
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:20px;
+
+    padding-bottom:20px;
+
+    border-bottom:1px solid var(--doc-border);
+
+}
+
+
+
+.document-information-grid {
+
+
+    display:grid;
+
+    grid-template-columns:
+
+    repeat(5,1fr);
+
+    gap:15px;
+
+    margin:25px 0;
+
+}
+
+
+
+.document-information-grid div {
+
+
+    background:#f8fafc;
+
+    padding:15px;
+
+    border-radius:14px;
+
+}
+
+
+
+.dark .document-information-grid div {
+
+
+    background:#1e293b;
+
+}
+
+
+
+.document-information-grid label {
+
+
+    display:block;
+
+    color:var(--doc-muted);
+
+    font-size:13px;
+
+}
+
+
+
+
+
+/* ===============================
+   CONTENT VIEWER
+================================ */
+
+
+.document-reader {
+
+
+    margin-top:25px;
+
+}
+
+
+
+.document-reader h4 {
+
+
+    font-size:20px;
+
+}
+
+
+
+.document-reader pre {
+
+
+    background:#f8fafc;
+
+    padding:25px;
+
+    border-radius:18px;
+
+    max-height:500px;
+
+    overflow:auto;
+
+    white-space:pre-wrap;
+
+    line-height:1.7;
+
+    font-family:inherit;
+
+}
+
+
+
+.dark .document-reader pre {
+
+
+    background:#020617;
+
+}
+
+
+
+
+
+/* ===============================
+   EDIT FORM
+================================ */
+
+
+.edit-form {
+
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:15px;
+
+}
+
+
+
+.edit-form label {
+
+
+    font-weight:700;
+
+}
+
+
+
+.edit-form input {
+
+
+    padding:15px;
+
+    border-radius:14px;
+
+    border:1px solid var(--doc-border);
+
+    background:transparent;
+
+    color:var(--doc-text);
+
+    font-size:16px;
+
+}
+
+
+
+.edit-form textarea {
+
+
+    min-height:450px;
+
+    padding:18px;
+
+    border-radius:16px;
+
+    resize:vertical;
+
+    border:1px solid var(--doc-border);
+
+    background:transparent;
+
+    color:var(--doc-text);
+
+    font-family:inherit;
+
+    line-height:1.6;
+
+}
+
+
+
+.edit-form input:focus,
+
+.edit-form textarea:focus {
+
+
+    outline:none;
+
+    border-color:var(--doc-primary);
+
+}
+
+
+
+
+
+.save-document-button {
+
+
+    align-self:flex-end;
+
+    padding:14px 30px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:var(--doc-primary);
+
+    color:white;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+}
+
+
+
+.save-document-button:hover {
+
+
+    background:var(--doc-primary-hover);
+
+}
+
+
+
+
+
+/* ===============================
+   DELETE MODAL
+================================ */
+
+
+.delete-confirm-modal {
+
+
+    background:var(--doc-card);
+
+    color:var(--doc-text);
+
+    padding:35px;
+
+    border-radius:22px;
+
+    width:400px;
+
+    text-align:center;
+
+}
+
+
+
+.delete-confirm-modal h3 {
+
+
+    font-size:25px;
+
+}
+
+
+
+.delete-confirm-modal p {
+
+
+    color:var(--doc-muted);
+
+    line-height:1.6;
+
+}
+
+
+
+.delete-actions {
+
+
+    display:flex;
+
+    gap:15px;
+
+    margin-top:25px;
+
+}
+
+
+
+.cancel-delete {
+
+
+    flex:1;
+
+    padding:12px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#e2e8f0;
+
+    cursor:pointer;
+
+}
+
+
+
+.confirm-delete {
+
+
+    flex:1;
+
+    padding:12px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#dc2626;
+
+    color:white;
+
+    cursor:pointer;
+
+}
+
+
+
+
+
+/* ===============================
+   RESPONSIVE
+================================ */
+
+
+@media(max-width:900px){
+
+
+    .document-information-grid{
+
+
+        grid-template-columns:
+
+        repeat(2,1fr);
+
+    }
+
+
+}
+
+
+
+@media(max-width:700px){
+
+
+    .admin-documents-page{
+
+
+        padding:15px;
+
+    }
+
+
+
+    .document-page-header{
+
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+    }
+
+
+
+    .document-meta{
+
+
+        grid-template-columns:1fr;
+
+    }
+
+
+
+    .document-card-actions{
+
+
+        flex-direction:column;
+
+    }
+
+
+
+    .document-information-grid{
+
+
+        grid-template-columns:1fr;
+
+    }
+
+
+
+    .document-detail-header{
+
+
+        flex-direction:column;
+
+    }
+
+
+}
+
+
+
+
+
+/* ===============================
+   SCROLLBAR
+================================ */
+
+
+.document-modal::-webkit-scrollbar,
+
+.document-reader pre::-webkit-scrollbar {
+
+
+    width:8px;
+
+}
+
+
+
+.document-modal::-webkit-scrollbar-thumb,
+
+.document-reader pre::-webkit-scrollbar-thumb {
+
+
+    background:#94a3b8;
+
+    border-radius:20px;
+
+}

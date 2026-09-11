@@ -79,35 +79,19 @@ await Chat.countDocuments();
 
 
 
-
-let totalDocuments = 0;
-
-
-
-if(Document){
-
-totalDocuments =
+const totalDocuments =
 await Document.countDocuments();
-
-}
-
-
 
 
 
 
 res.status(200).json({
 
-
 totalUsers,
-
 
 totalChats,
 
-
 totalDocuments
-
-
 
 });
 
@@ -116,13 +100,15 @@ totalDocuments
 }
 
 
-
 catch(error){
 
 
 console.log(
+
 "ADMIN STATS ERROR:",
+
 error
+
 );
 
 
@@ -139,7 +125,6 @@ message:"Unable to load statistics"
 
 
 };
-
 
 
 

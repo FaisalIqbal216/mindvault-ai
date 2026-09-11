@@ -2,86 +2,202 @@ require("dotenv").config();
 
 
 const express = require("express");
+
 const cors = require("cors");
 
 
-const connectDB = require("./config/database");
+
+const connectDB =
+
+require("./config/database");
 
 
 
-const app = express();
+
+const app = new express();
 
 
 
-// Database Connection
+
+
+// =====================================
+
+// DATABASE
+
+// =====================================
+
 
 connectDB();
 
 
 
-// Middlewares
+
+
+// =====================================
+
+// GLOBAL MIDDLEWARE
+
+// =====================================
+
 
 app.use(
-    cors()
+
+cors()
+
 );
 
 
+
 app.use(
-    express.json()
+
+express.json()
+
 );
 
 
 
-// Routes
 
-const chatRoutes = require("./routes/chatRoutes");
 
-const authRoutes = require("./routes/authRoutes");
+
+
+
+
+// =====================================
+
+// ROUTES
+
+// =====================================
+
+
+const chatRoutes =
+
+require("./routes/chatRoutes");
+
+
+
+const authRoutes =
+
+require("./routes/authRoutes");
+
+
 
 const chatHistoryRoutes =
+
 require("./routes/chatHistoryRoutes");
 
+
+
 const userRoutes =
+
 require("./routes/userRoutes");
 
 
 
 const adminRoutes =
+
 require("./routes/adminRoutes");
-// Chat API
+
+
+
+// =====================================
+
+// DOCUMENT ROUTES
+
+// =====================================
+
+
+const documentRoutes =
+
+require("./routes/documentRoutes");
+
+
+
+
+
+
+
+
+// =====================================
+
+// CHAT API
+
+// =====================================
+
 
 app.use(
-    "/api/chat",
-    chatRoutes
+
+"/api/chat",
+
+chatRoutes
+
 );
 
 
 
-// Authentication API
+
+
+// =====================================
+
+// AUTHENTICATION API
+
+// =====================================
+
 
 app.use(
-    "/api/auth",
-    authRoutes
+
+"/api/auth",
+
+authRoutes
+
 );
 
 
 
-// Chat History API
+
+
+// =====================================
+
+// CHAT HISTORY API
+
+// =====================================
+
 
 app.use(
-    "/api/chat-history",
-    chatHistoryRoutes
+
+"/api/chat-history",
+
+chatHistoryRoutes
+
 );
 
 
 
-// User Profile + Settings API
+
+
+// =====================================
+
+// USER PROFILE + SETTINGS API
+
+// =====================================
+
 
 app.use(
-    "/api/user",
-    userRoutes
+
+"/api/user",
+
+userRoutes
+
 );
 
+
+
+
+
+// =====================================
+
+// ADMIN API
+
+// =====================================
 
 
 app.use(
@@ -92,15 +208,106 @@ adminRoutes
 
 );
 
-// Server
+
+
+
+
+// =====================================
+
+// ADMIN DOCUMENT / KNOWLEDGE BASE API
+
+// =====================================
+
+
+// Final endpoints:
+//
+// POST   /api/admin/documents/upload
+// GET    /api/admin/documents
+// GET    /api/admin/documents/:id
+// PUT    /api/admin/documents/:id
+// DELETE /api/admin/documents/:id
+
+
+app.use(
+
+"/api/admin/documents",
+
+documentRoutes
+
+);
+
+
+
+
+
+
+
+
+
+// =====================================
+
+// HEALTH CHECK
+
+// =====================================
+
+
+app.get(
+
+"/api/health",
+
+(req,res)=>{
+
+
+res.status(200).json({
+
+status:"ok",
+
+message:"MindVault AI backend is running"
+
+});
+
+
+}
+
+);
+
+
+
+
+
+
+
+
+
+// =====================================
+
+// SERVER
+
+// =====================================
+
+
+const PORT =
+
+process.env.PORT || 5000;
+
+
+
+
 
 app.listen(
-    5000,
-    ()=>{
 
-        console.log(
-            "Server running on port 5000"
-        );
+PORT,
 
-    }
+()=>{
+
+
+console.log(
+
+`Server running on port ${PORT}`
+
+);
+
+
+}
+
 );
